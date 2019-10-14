@@ -1,7 +1,7 @@
 # ssm整合基本代码
 ## 原项目地址	
-基于博客文章，https://blog.csdn.net/qq598535550/article/details/51703190，搭建的最基本ssm框架。		
-github:https://github.com/liyifeng1994/ssm
+基于博客文章，[https://blog.csdn.net/qq598535550/article/details/51703190](https://blog.csdn.net/qq598535550/article/details/51703190)，搭建的最基本ssm框架。		
+github:	[https://github.com/liyifeng1994/ssm](https://github.com/liyifeng1994/ssm)
 ## 1. 数据库
 ```sql
 -- 添加新用户
@@ -17,6 +17,6 @@ flush privileges;
 1. 项目导入eclipse
 2. 右键项目，debug as --> debug on server
 3. 访问地址		
-	http://localhost:8080/ssm/hello	
-	http://localhost:8080/ssm/1000/detail		
+	- http://localhost:8080/ssm/hello	
+	- http://localhost:8080/ssm/1000/detail		
 
