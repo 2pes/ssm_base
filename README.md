@@ -1,7 +1,8 @@
 # ssm整合基本代码
 ## 原项目地址	
-基于博客文章，[https://blog.csdn.net/qq598535550/article/details/51703190](https://blog.csdn.net/qq598535550/article/details/51703190)，搭建的最基本ssm框架。		
-github:	[https://github.com/liyifeng1994/ssm](https://github.com/liyifeng1994/ssm)
+- 基于博客文章，[https://blog.csdn.net/qq598535550/article/details/51703190](https://blog.csdn.net/qq598535550/article/details/51703190)，搭建的最基本ssm框架，平时用于考核新人，练习使用。		
+- github:	[https://github.com/liyifeng1994/ssm](https://github.com/liyifeng1994/ssm)	
+
 ## 1. 数据库
 ```sql
 -- 添加新用户
