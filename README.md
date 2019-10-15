@@ -17,7 +17,7 @@ flush privileges;
 ## 2. 项目导入
 1. 项目导入eclipse
 2. 右键项目，debug as --> debug on server
-3. 访问地址		
-	- http://localhost:8080/ssm/hello	
-	- http://localhost:8080/ssm/1000/detail		
-
+3. 访问地址			
+	- http://localhost:8080/ssm/	
+	- http://localhost:8080/ssm/book/list	
+	- http://localhost:8080/ssm/book/1000/detail		

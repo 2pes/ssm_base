@@ -1,7 +1,7 @@
 package com.company.project.service;
 
 
-import com.company.project.entity.Book;
+import com.company.project.model.Book;
 
 
 /**

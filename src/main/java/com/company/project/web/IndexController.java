@@ -8,12 +8,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class IndexController {
 
-	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	private String index(Model model) {
+
+		return "redirect:/hello";// WEB-INF/jsp/"list".jsp
+	}
+
 
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
-	private String list(Model model) {
+	private String hello(Model model) {
 
-		return "list";// WEB-INF/jsp/"list".jsp
+		return "hello";// WEB-INF/jsp/"list".jsp
 	}
 
 }

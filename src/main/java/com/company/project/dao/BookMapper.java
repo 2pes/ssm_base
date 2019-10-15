@@ -1,6 +1,6 @@
 package com.company.project.dao;
 
-import com.company.project.entity.Book;
+import com.company.project.model.Book;
 
 public interface BookMapper {
 

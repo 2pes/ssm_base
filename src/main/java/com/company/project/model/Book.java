@@ -1,4 +1,4 @@
-package com.company.project.entity;
+package com.company.project.model;
 
 /**
  * 图书实体

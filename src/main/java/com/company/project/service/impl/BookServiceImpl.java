@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.company.project.dao.BookMapper;
-import com.company.project.entity.Book;
+import com.company.project.model.Book;
 import com.company.project.service.BookService;
 
 
