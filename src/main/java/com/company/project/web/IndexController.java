@@ -11,9 +11,14 @@ public class IndexController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	private String index(Model model) {
 
-		return "redirect:/hello";// WEB-INF/jsp/"list".jsp
+		return "redirect:/index";// WEB-INF/jsp/"list".jsp
 	}
 
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	private String indexPage(Model model) {
+
+		return "index";// WEB-INF/jsp/"list".jsp
+	}
 
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	private String hello(Model model) {

@@ -120,8 +120,11 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-
-
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>easyui-186</artifactId>
+			<version>1.8.6</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>ssm</finalName>
