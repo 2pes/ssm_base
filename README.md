@@ -15,10 +15,10 @@
 	-- 刷新权限
 	flush privileges;
 	```		
-2. 导入执sql目录下的`schemasql`文件。
+2. 导入执sql目录下的`schema.sql`文件。
 
 ## 2. 项目导入
-1. 项目导入eclipse。
+1. 以maven项目导入eclipse或idea。
 2. 右键项目，`debug as` --> `debug on server`。
 3. 访问地址：		
 	- http://localhost:8080/ssm/	
