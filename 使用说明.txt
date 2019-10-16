@@ -15,5 +15,5 @@ flush privileges;
 3. 访问地址		
 	- http://localhost:8080/ssm/	
 	- http://localhost:8080/ssm/book/list	
-	- http://localhost:8080/ssm/book/1000/detail		
+	- http://localhost:8080/ssm/book/1000/detail	
 

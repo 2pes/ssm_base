@@ -1,19 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/commons/taglib.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Fluid Layout - jQuery EasyUI Demo</title>
-<link rel="stylesheet" type="text/css" href="${ctx }/webjars/easyui-186/1.8.6/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="${ctx }/webjars/easyui-186/1.8.6/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="${ctx }/webjars/easyui-186/1.8.6/demo.css">
-<script type="text/javascript" src="${ctx }/webjars/easyui-186/1.8.6/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx }/webjars/easyui-186/1.8.6/jquery.easyui.min.js"></script>
-</head>
+<%@ include file="/WEB-INF/jsp/commons/head.jsp"%>
 <body class="easyui-layout">
 	<div data-options="region:'north',title:'North Title',split:true" style="height: 100px;"></div>
-	<div data-options="region:'east',title:'East',split:true" style="width: 100px;"></div>
 	<div data-options="region:'west',title:'West'" style="width: 205px;">
 		<div style="margin: 20px 0;">
 			<a href="javascript:;" class="easyui-linkbutton" onclick="toggle()">Toggle</a>
@@ -60,7 +49,7 @@
 	</div>
 	<div data-options="region:'center',title:'center title'" style="padding: 5px; background: #eee;">
 		<table class="easyui-datagrid" style="width: 100%; height: 100%"
-			data-options="rownumbers:true,singleSelect:true,url:'static/js/mock/datagrid_data.json',method:'get',toolbar:'#tb',footer:'#ft'">
+			data-options="rownumbers:true,singleSelect:true,pagination:true,url:'static/js/mock/datagrid_data.json',method:'get',toolbar:'#tb',footer:'#ft'">
 			<thead>
 				<tr>
 					<th data-options="field:'itemid',width:80">Item ID</th>
@@ -94,6 +83,29 @@
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cut" plain="true"></a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"></a>
 		</div>
+		<script type="text/javascript">
+			$(function() {
+				var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
+				pager.pagination({
+					buttons : [ {
+						iconCls : 'icon-search',
+						handler : function() {
+							alert('search');
+						}
+					}, {
+						iconCls : 'icon-add',
+						handler : function() {
+							alert('add');
+						}
+					}, {
+						iconCls : 'icon-edit',
+						handler : function() {
+							alert('edit');
+						}
+					} ]
+				});
+			})
+		</script>
 	</div>
 </body>
 </html>
