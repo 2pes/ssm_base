@@ -24,3 +24,6 @@
 	- http://localhost:8080/ssm/	
 	- http://localhost:8080/ssm/book/list	
 	- http://localhost:8080/ssm/book/1000/detail	
+	
+## 3. 分支permrm_system
+permrm_system分支使用easyui作为前端，实现基本权限管理功能。
