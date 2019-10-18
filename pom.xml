@@ -38,6 +38,7 @@
 		<standard.version>1.1.2</standard.version>
 		<mysql-connector-java.version>5.1.46</mysql-connector-java.version>
 		<lombok.version>1.16.20</lombok.version>
+		<jackson.version>2.9.8</jackson.version>
 
 		<easyui-186.version>1.8.6</easyui-186.version>
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -57,7 +58,7 @@
 			<artifactId>logback-classic</artifactId>
 			<version>${logback-classic.version}</version>
 		</dependency>
-		<!-- 2.springMVC的jar包，由于springMVC依赖 springBeans,springContext,springCore
+		<!-- 2.springMVC的jar包，由于springMVC依赖 springBeans,springContext,springCore 
 			所以这些jar包会被导入进来 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -148,6 +149,12 @@
 			<artifactId>lombok</artifactId>
 			<version>${lombok.version}</version>
 			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 
 		<dependency>

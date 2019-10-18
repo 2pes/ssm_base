@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/commons/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -15,16 +16,25 @@
 
 		<div style="position: absolute; bottom: 0px; right: 0px;">
 			<div class="easyui-panel" style="margin: 0 5px 5px 0; border: none;">
-				<a href="https://www.jeasyui.com/documentation/index.php" target="_blank" class="easyui-linkbutton" data-options="plain:true">easyui api</a>
-				<a href="https://www.jeasyui.com/demo/main/index.php" target="_blank" class="easyui-linkbutton" data-options="plain:true">easyui demo</a>
-				<a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-cancel'">Cancel</a>
-				<a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'">Refresh</a>
-				<a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'">Search</a>
-				<a href="#" class="easyui-linkbutton" data-options="plain:true">Text Button</a>
-				<a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-print'">Print</a>
-				<a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-help'"> </a>
-				<a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'">用户操作</a>
-				<a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-back'">退出</a>
+				<a href="https://www.jeasyui.com/documentation/index.php"
+					target="_blank" class="easyui-linkbutton" data-options="plain:true">easyui
+					api</a> <a href="https://www.jeasyui.com/demo/main/index.php"
+					target="_blank" class="easyui-linkbutton" data-options="plain:true">easyui
+					demo</a> <a href="#" class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-cancel'">Cancel</a> <a
+					href="#" class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-reload'">Refresh</a> <a
+					href="#" class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-search'">Search</a> <a
+					href="#" class="easyui-linkbutton" data-options="plain:true">Text
+					Button</a> <a href="#" class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-print'">Print</a> <a
+					href="#" class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-help'"> </a> <a href="#"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-save'">用户操作</a> <a href="#"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-back'">退出</a>
 			</div>
 		</div>
 	</div>
@@ -35,41 +45,45 @@
 		<div id="sm"></div>
 
 	</div>
-	<div data-options="region:'center'" style="padding: 5px; background: #eee;">
+	<div data-options="region:'center'"
+		style="padding: 5px; background: #eee;">
 		<table class="easyui-datagrid" style="width: 100%; height: 100%"
 			data-options="rownumbers:true,singleSelect:true,pagination:true,url:'static/js/mock/datagrid_data.json',method:'get',toolbar:'#tb',footer:'#ft'">
 			<thead>
 				<tr>
 					<th data-options="field:'itemid',width:80">Item ID</th>
 					<th data-options="field:'productid',width:100">Product</th>
-					<th data-options="field:'listprice',width:80,align:'right'">List Price</th>
-					<th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
+					<th data-options="field:'listprice',width:80,align:'right'">List
+						Price</th>
+					<th data-options="field:'unitcost',width:80,align:'right'">Unit
+						Cost</th>
 					<th data-options="field:'attr1',width:240">Attribute</th>
 					<th data-options="field:'status',width:60,align:'center'">Status</th>
 				</tr>
 			</thead>
 		</table>
 		<div id="tb" style="padding: 2px 5px;">
-			Date From:
-			<input class="easyui-datebox" style="width: 110px">
-			To:
-			<input class="easyui-datebox" style="width: 110px">
-			Language:
-			<select class="easyui-combobox" panelHeight="auto" style="width: 100px">
+			Date From: <input class="easyui-datebox" style="width: 110px">
+			To: <input class="easyui-datebox" style="width: 110px">
+			Language: <select class="easyui-combobox" panelHeight="auto"
+				style="width: 100px">
 				<option value="java">Java</option>
 				<option value="c">C</option>
 				<option value="basic">Basic</option>
 				<option value="perl">Perl</option>
 				<option value="python">Python</option>
-			</select>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-search">Search</a>
+			</select> <a href="#" class="easyui-linkbutton" iconCls="icon-search">Search</a>
 		</div>
 		<div id="ft" style="padding: 2px 5px;">
-			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>
-			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="toggledialog()"></a>
-			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="toggledialog()"></a>
-			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cut" plain="true"></a>
-			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"></a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-add" plain="true"></a> <a href="javascript:void(0)"
+				class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+				onclick="toggledialog()"></a> <a href="javascript:void(0)"
+				class="easyui-linkbutton" iconCls="icon-save" plain="true"
+				onclick="toggledialog()"></a> <a href="javascript:void(0)"
+				class="easyui-linkbutton" iconCls="icon-cut" plain="true"></a> <a
+				href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-remove" plain="true"></a>
 		</div>
 
 	</div>
@@ -132,7 +146,7 @@
 			href : ctx + '/sys/dialog',
 			modal : true
 		});
-	}
+	};
 	$(function() {
 		$('#sm').sidemenu({
 			data : sidemenudata,
@@ -157,6 +171,6 @@
 				}
 			} ]
 		});
-	})
+	});
 </script>
 </html>
