@@ -77,7 +77,6 @@
 </body>
 
 <script type="text/javascript">
-	var ctx = "${ctx }";
 	var sidemenudata = [ {
 		text : '系统管理',
 		iconCls : 'icon-sum',

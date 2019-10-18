@@ -26,4 +26,5 @@
 	- http://localhost:8080/ssm/book/1000/detail	
 	
 ## 3. 分支permrm_system
-permrm_system分支使用easyui作为前端，实现基本权限管理功能。
+permrm_system分支使用easyui作为前端，实现基本权限管理功能。	
+地址：[https://github.com/maxmarvel/ssm_base/tree/perm_system](https://github.com/maxmarvel/ssm_base/tree/perm_system)	
