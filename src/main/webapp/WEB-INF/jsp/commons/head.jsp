@@ -5,6 +5,6 @@
 <script type="text/javascript" src="${ctx }/webjars/easyui-186/1.8.6/jquery.easyui.min.js"></script>
 <script type="text/javascript">
 	var ctx = "${ctx }";
-	var cureentUser = "${user }";
+	/* var cureentUser = "${user }"; */
 </script>
 </head>
