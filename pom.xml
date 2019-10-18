@@ -37,8 +37,8 @@
 		<jstl.version>1.2</jstl.version>
 		<standard.version>1.1.2</standard.version>
 		<mysql-connector-java.version>5.1.46</mysql-connector-java.version>
-        <lombok.version>1.16.20</lombok.version>
-		
+		<lombok.version>1.16.20</lombok.version>
+
 		<easyui-186.version>1.8.6</easyui-186.version>
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
 	</properties>
@@ -57,7 +57,7 @@
 			<artifactId>logback-classic</artifactId>
 			<version>${logback-classic.version}</version>
 		</dependency>
-		<!-- 2.springMVC的jar包，由于springMVC依赖 springBeans,springContext,springCore 
+		<!-- 2.springMVC的jar包，由于springMVC依赖 springBeans,springContext,springCore
 			所以这些jar包会被导入进来 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -86,7 +86,7 @@
 			<scope>compile</scope>
 		</dependency>
 
-		
+
 		<!-- 3.Servlet web -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -142,20 +142,45 @@
 			<version>${mysql-connector-java.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
-		
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.webjars.npm</groupId>
 			<artifactId>easyui-186</artifactId>
 			<version>${easyui-186.version}</version>
 		</dependency>
 	</dependencies>
+	<!--这里定义了profiles 用来区分开发、测试、生产环境 -->
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<env>dev</env>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<env>test</env>
+			</properties>
+		</profile>
+		<profile>
+			<id>online</id>
+			<properties>
+				<env>online</env>
+			</properties>
+		</profile>
+	</profiles>
+
 	<build>
 		<finalName>ssm_perm</finalName>
 		<plugins>

@@ -22,6 +22,13 @@
 		(2)允许使用"/"做整体映射
 	 -->
 	 <mvc:default-servlet-handler/>
+
+
+	<!--过滤静态资源 -->
+	<!-- <mvc:resources location="/css" mapping="/css/**"/> <mvc:resources location="/images/" 
+		mapping="/images/**"/> <mvc:resources location="/js/" mapping="/js/**"/> -->
+
+	 
 	 
 	 <!-- 3.配置jsp 显示ViewResolver -->
 	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
