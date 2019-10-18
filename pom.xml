@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>ssm</name>
+	<name>ssm_perm</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -139,7 +139,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>ssm</finalName>
+		<finalName>ssm_perm</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
