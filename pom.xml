@@ -37,6 +37,8 @@
 		<jstl.version>1.2</jstl.version>
 		<standard.version>1.1.2</standard.version>
 		<mysql-connector-java.version>5.1.46</mysql-connector-java.version>
+        <lombok.version>1.16.20</lombok.version>
+		
 		<easyui-186.version>1.8.6</easyui-186.version>
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
 	</properties>
@@ -77,6 +79,14 @@
 			<version>${spring.version}</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		
 		<!-- 3.Servlet web -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -132,6 +142,14 @@
 			<version>${mysql-connector-java.version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+		
 		<dependency>
 			<groupId>org.webjars.npm</groupId>
 			<artifactId>easyui-186</artifactId>

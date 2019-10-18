@@ -28,3 +28,9 @@
 ## 3. 分支permrm_system
 permrm_system分支使用easyui作为前端，实现基本权限管理功能。	
 地址：[https://github.com/maxmarvel/ssm_base/tree/perm_system](https://github.com/maxmarvel/ssm_base/tree/perm_system)	
+
+## 4. 测试
+controller测试，测试appoint方法可不必写jsp，用curl就行，比如		
+```sh
+curl -H “Accept: application/json; charset=utf-8” -d “studentId=1234567890” localhost:8080/ssm_perm/book/1003/appoint
+```

@@ -1,5 +1,7 @@
 package com.company.project.model;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * 图书实体
+ * 预约图书实体
  */
 @Builder
 @AllArgsConstructor
@@ -16,14 +18,16 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Book {
+public class Appointment {
 
 	private long bookId;// 图书ID
 
-	private String name;// 图书名称
+	private long studentId;// 学号
 
-	private int number;// 馆藏数量
+	private Date appointTime;// 预约时间
 
+	// 多对一的复合属性
+	private Book book;// 图书实体
 	
 
 }
