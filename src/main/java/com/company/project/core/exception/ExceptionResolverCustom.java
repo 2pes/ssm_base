@@ -6,6 +6,8 @@ import java.lang.reflect.Method;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -19,6 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.company.project.core.model.ExceptionResultInfo;
 import com.company.project.core.model.ResultInfo;
+import com.company.project.module.book.dto.AppointExecution;
+import com.company.project.module.book.enums.AppointStateEnum;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 
@@ -36,8 +43,10 @@ import com.company.project.core.model.ResultInfo;
  * @date 2014年11月26日下午5:36:56
  * @version 1.0
  */
+@Getter
+@Setter
 public class ExceptionResolverCustom implements HandlerExceptionResolver {
-
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	// json转换器
 	// 将异常信息转json
 	private HttpMessageConverter<ExceptionResultInfo> jsonMessageConverter;
@@ -81,15 +90,17 @@ public class ExceptionResolverCustom implements HandlerExceptionResolver {
 
 	// 异常信息解析方法
 	private ExceptionResultInfo resolveExceptionCustom(Exception ex) {
-		ResultInfo resultInfo = null;
+		ResultInfo<Object> resultInfo = null;
 		if (ex instanceof ExceptionResultInfo) {
 			// 抛出的是系统自定义异常
 			resultInfo = ((ExceptionResultInfo) ex).getResultInfo();
 		} else {
 			// 重新构造“未知错误”异常
-			resultInfo = new ResultInfo();
+			resultInfo = new ResultInfo<Object>();
 			resultInfo.setType(ResultInfo.TYPE_RESULT_FAIL);
-			resultInfo.setMessage("未知错误！");
+			resultInfo.setData(
+					new AppointExecution(AppointStateEnum.INNER_ERROR.getState(), AppointStateEnum.INNER_ERROR));
+			resultInfo.setMessage("未知错误！" + AppointStateEnum.INNER_ERROR.getStateInfo());
 		}
 
 		return new ExceptionResultInfo(resultInfo);
@@ -102,28 +113,17 @@ public class ExceptionResolverCustom implements HandlerExceptionResolver {
 
 		// 解析异常
 		ExceptionResultInfo exceptionResultInfo = resolveExceptionCustom(ex);
-
 		HttpOutputMessage outputMessage = new ServletServerHttpResponse(response);
-
 		try {
 			// 将exceptionResultInfo对象转成json输出
 			jsonMessageConverter.write(exceptionResultInfo, MediaType.APPLICATION_JSON, outputMessage);
 		} catch (HttpMessageNotWritableException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
-
 		return new ModelAndView();
 
-	}
-
-	public HttpMessageConverter<ExceptionResultInfo> getJsonMessageConverter() {
-		return jsonMessageConverter;
-	}
-
-	public void setJsonMessageConverter(HttpMessageConverter<ExceptionResultInfo> jsonMessageConverter) {
-		this.jsonMessageConverter = jsonMessageConverter;
 	}
 
 }

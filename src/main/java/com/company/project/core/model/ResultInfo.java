@@ -23,7 +23,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ResultInfo {
+public class ResultInfo<T> {
 	public static final int TYPE_RESULT_FAIL = 0;// 失败
 	public static final int TYPE_RESULT_SUCCESS = 1;// 成功
 	public static final int TYPE_RESULT_WARN = 2;// 警告
@@ -48,15 +48,9 @@ public class ResultInfo {
 	 * 提示信息明细列表
 	 */
 	private List<ResultInfo> details;
-
-	public List<ResultInfo> getDetails() {
-		return details;
-	}
-
-	public void setDetails(List<ResultInfo> details) {
-		this.details = details;
-	}
-
+	
+	private T data;// 成功时返回的数据
+	
 	/**
 	 * 提示消息对应操作的序号，方便用户查找问题，通常用于在批量提示信息中标识记录序号
 	 */

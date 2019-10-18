@@ -53,22 +53,14 @@ public class BookController {
 			"application/json; charset=utf-8" })
 	@ResponseBody
 	private Result<AppointExecution> appoint(@PathVariable("bookId") Long bookId,
-			@RequestParam("studentId") Long studentId) {
+			@RequestParam("studentId") Long studentId) throws Exception {
 		if (studentId == null || studentId.equals("")) {
 			return new Result<>(false, "学号不能为空");
 		}
 		// AppointExecution execution = bookService.appoint(bookId,
 		// studentId);//错误写法，不能统一返回，要处理异常（失败）情况
-		AppointExecution execution = null;
-		try {
-			execution = bookService.appoint(bookId, studentId);
-		} catch (NoNumberException e1) {
-			execution = new AppointExecution(bookId, AppointStateEnum.NO_NUMBER);
-		} catch (RepeatAppointException e2) {
-			execution = new AppointExecution(bookId, AppointStateEnum.REPEAT_APPOINT);
-		} catch (Exception e) {
-			execution = new AppointExecution(bookId, AppointStateEnum.INNER_ERROR);
-		}
+		AppointExecution execution = bookService.appoint(bookId, studentId);
+
 		return new Result<AppointExecution>(true, execution);
 	}
 

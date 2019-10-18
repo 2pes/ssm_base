@@ -139,14 +139,37 @@
 	function toggledialog() {
 		$('#dd').dialog({
 			title : 'My Dialog',
-			width : 400,
-			height : 200,
+			width : 800,
+			height : 400,
 			closed : false,
 			cache : false,
 			href : ctx + '/sys/dialog',
 			modal : true
 		});
 	};
+
+	//统一封装方法，作用：提示信息
+	function message_alert(data) {
+		//从返回的json数据中获取结果信息
+		var data_v = data.resultInfo;
+
+		//提交结果类型
+		var type = data_v.type;
+		//结果提示信息
+		var message = data_v.message;
+		//alert(message);
+		if (type == 0) {
+			//如果type等于0表示失败，调用 jquery easyui的信息提示组件
+			$.messager.alert('提示信息', message, 'error');
+		} else if (type == 1) {
+			$.messager.alert('提示信息', message, 'success');
+		} else if (type == 2) {
+			$.messager.alert('提示信息', message, 'warning');
+		} else if (type == 3) {
+			$.messager.alert('提示信息', message, 'info');
+		}
+	};
+
 	$(function() {
 		$('#sm').sidemenu({
 			data : sidemenudata,
@@ -172,5 +195,68 @@
 			} ]
 		});
 	});
+
+	function bookAppoint(id) {
+		//准备使用jquery 提供的ajax Form提交方式
+		//将form的id传入，方法自动将form中的数据组成成key/value数据，通过ajax提交，提交方法类型为form中定义的method，
+		//使用ajax form提交时，不用指定url，url就是form中定义的action
+		//此种方式和原始的post方式差不多，只不过使用了ajax方式
+
+		//第一个参数：form的id
+		//第二个参数：sysusersave_callback是回调函数，sysusersave_callback当成一个方法的指针
+		//第三个参数：传入的参数， 可以为空
+		//第四个参数：dataType预期服务器返回的数据类型,这里action返回json
+		//根据form的id找到该form的action地址
+		//studentId=1234567890
+		jquerySubByFId('userform', sysusersave_callback, null, "json");
+
+	}
+	//ajax调用的回调函数，ajax请求完成调用此函数，传入的参数是action返回的结果
+	function sysusersave_callback(data) {
+		message_alert(data);
+	};
+	/*
+	 *form提交(post方式)
+	 *
+	 *formId form Id
+	 *callbackfn 回调函数名(要求函数必须有参数且不能多与两个,一个参数时参数为响应文本,两个参数时第一个参数为响应文本)
+	 *param 回调函数参数(如果为null,那么调用一个参数的回调函数,否则调用两个参数的回调函数)
+	 */
+	function jquerySubByFId(formId, callbackFn, param, dataType) {
+		var formObj = $("#" + formId);
+		var options = {
+			dataType : ("undefined" != dataType && null != dataType) ? dataType
+					: "json",
+			success : function(responseText) {
+				if (param === null) {
+					callbackFn(responseText);
+				} else {
+					callbackFn(responseText, param);
+				}
+			}
+		};
+		var sendData = {
+			"studentId" : 1234567890
+		};
+		$.ajax({
+			url : ctx + "/book/1003/appoint",//交互地址
+			type : "post",//方法
+			//dataType:"json",
+			//dataType : "application/json",//头部
+			data : sendData,//数据
+			success : function(backData) {
+				var responseText = backData;
+				if (param === null) {
+					callbackFn(responseText);
+				} else {
+					callbackFn(responseText, backData.resultInfo.data.bookId);
+				}
+
+			},
+			error : function(r, d, i) {
+			}
+		})
+		/* formObj.ajaxSubmit(options); */
+	};
 </script>
 </html>

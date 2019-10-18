@@ -31,7 +31,8 @@ public interface BookService {
 	 * @param bookId
 	 * @param studentId
 	 * @return
+	 * @throws Exception 
 	 */
-	AppointExecution appoint(long bookId, long studentId);
+	AppointExecution appoint(long bookId, long studentId) throws Exception;
 
 }

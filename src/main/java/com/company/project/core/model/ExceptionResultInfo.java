@@ -1,5 +1,9 @@
 package com.company.project.core.model;
 
+import com.company.project.core.exception.RepeatAppointException;
+import com.company.project.module.book.dto.AppointExecution;
+import com.company.project.module.book.enums.AppointStateEnum;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +21,5 @@ public class ExceptionResultInfo extends Exception {
 		super(resultInfo.getMessage());
 		this.resultInfo = resultInfo;
 	}
-
-	
 
 }
