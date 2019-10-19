@@ -19,7 +19,8 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.company.project.core.model.ResultInfo;
+import com.company.project.core.model.ExceptionResult;
+import com.company.project.core.model.Result;
 import com.company.project.module.book.dto.AppointExecution;
 import com.company.project.module.book.enums.AppointStateEnum;
 
@@ -48,7 +49,7 @@ public class ExceptionResolverCustom implements HandlerExceptionResolver {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	// json转换器
 	// 将异常信息转json
-	private HttpMessageConverter<ExceptionResultInfo> jsonMessageConverter;
+	private HttpMessageConverter<ExceptionResult> jsonMessageConverter;
 
 	// 前端控制器调用此方法执行异常处理
 	// handler，执行的action类就包装了一个方法（对应url的方法）
@@ -75,34 +76,34 @@ public class ExceptionResolverCustom implements HandlerExceptionResolver {
 		// 这里说明action返回的是jsp页面
 
 		// 解析异常
-		ExceptionResultInfo exceptionResultInfo = resolveExceptionCustom(ex);
+		ExceptionResult exceptionResultInfo = resolveExceptionCustom(ex);
 
 		// 将异常信息在异常页面显示
-		request.setAttribute("exceptionResultInfo", exceptionResultInfo.getResultInfo());
+		request.setAttribute("exceptionResultInfo", exceptionResultInfo.getResult());
 
 		// 转向错误页面
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("exceptionResultInfo", exceptionResultInfo.getResultInfo());
+		modelAndView.addObject("exceptionResultInfo", exceptionResultInfo.getResult());
 		modelAndView.setViewName("/error");// 逻辑视图名
 		return modelAndView;
 	}
 
 	// 异常信息解析方法
-	private ExceptionResultInfo resolveExceptionCustom(Exception ex) {
-		ResultInfo<Object> resultInfo = null;
-		if (ex instanceof ExceptionResultInfo) {
+	private ExceptionResult resolveExceptionCustom(Exception ex) {
+		Result<Object> resultInfo = null;
+		if (ex instanceof ExceptionResult) {
 			// 抛出的是系统自定义异常
-			resultInfo = ((ExceptionResultInfo) ex).getResultInfo();
+			resultInfo = ((ExceptionResult) ex).getResult();
 		} else {
 			// 重新构造“未知错误”异常
-			resultInfo = new ResultInfo<Object>();
-			resultInfo.setType(ResultInfo.TYPE_RESULT_FAIL);
+			resultInfo = new Result<Object>();
+			resultInfo.setType(Result.TYPE_RESULT_FAIL);
 			resultInfo.setData(
 					new AppointExecution(AppointStateEnum.INNER_ERROR.getState(), AppointStateEnum.INNER_ERROR));
 			resultInfo.setMessage("未知错误！" + AppointStateEnum.INNER_ERROR.getStateInfo());
 		}
 
-		return new ExceptionResultInfo(resultInfo);
+		return new ExceptionResult(resultInfo);
 
 	}
 
@@ -111,7 +112,7 @@ public class ExceptionResolverCustom implements HandlerExceptionResolver {
 			Exception ex) {
 
 		// 解析异常
-		ExceptionResultInfo exceptionResultInfo = resolveExceptionCustom(ex);
+		ExceptionResult exceptionResultInfo = resolveExceptionCustom(ex);
 		HttpOutputMessage outputMessage = new ServletServerHttpResponse(response);
 		try {
 			// 将exceptionResultInfo对象转成json输出

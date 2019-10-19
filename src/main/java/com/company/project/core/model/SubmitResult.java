@@ -12,12 +12,12 @@ import lombok.Setter;
  *
  */
 @Builder
-@AllArgsConstructor
+@AllArgsConstructor	
 @Getter
 @Setter
-public class SubmitResultInfo {
+public class SubmitResult {
 
 	// 操作结果信息
-	private ResultInfo resultInfo;
+	private Result result;
 
 }

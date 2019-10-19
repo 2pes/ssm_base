@@ -22,14 +22,14 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class DataGridResultInfo {
+public class DataGridResult {
 
-	public DataGridResultInfo(ResultInfo resultInfo) {
-		this.resultInfo = resultInfo;
+	public DataGridResult(Result result) {
+		this.result = result;
 	}
 
 	// 操作结果信息
-	private ResultInfo resultInfo;
+	private Result result;
 
 	// 总条数
 	private int total;

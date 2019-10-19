@@ -151,7 +151,7 @@
 	//统一封装方法，作用：提示信息
 	function message_alert(data) {
 		//从返回的json数据中获取结果信息
-		var data_v = data.resultInfo;
+		var data_v = data.result;
 
 		//提交结果类型
 		var type = data_v.type;
