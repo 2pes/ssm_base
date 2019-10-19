@@ -1,8 +1,6 @@
-package com.company.project.core.model;
+package com.company.project.core.exception;
 
-import com.company.project.core.exception.RepeatAppointException;
-import com.company.project.module.book.dto.AppointExecution;
-import com.company.project.module.book.enums.AppointStateEnum;
+import com.company.project.core.model.ResultInfo;
 
 import lombok.Getter;
 import lombok.Setter;

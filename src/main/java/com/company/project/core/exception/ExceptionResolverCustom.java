@@ -19,7 +19,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.company.project.core.model.ExceptionResultInfo;
 import com.company.project.core.model.ResultInfo;
 import com.company.project.module.book.dto.AppointExecution;
 import com.company.project.module.book.enums.AppointStateEnum;

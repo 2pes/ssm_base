@@ -8,17 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.company.project.core.exception.AppointException;
-import com.company.project.core.exception.NoNumberException;
-import com.company.project.core.exception.RepeatAppointException;
-import com.company.project.core.model.ExceptionResultInfo;
+import com.company.project.core.exception.ExceptionResultInfo;
 import com.company.project.core.model.ResultInfo;
 import com.company.project.module.book.dao.AppointmentMapper;
 import com.company.project.module.book.dao.BookMapper;
-import com.company.project.module.book.model.Appointment;
-import com.company.project.module.book.model.Book;
 import com.company.project.module.book.dto.AppointExecution;
 import com.company.project.module.book.enums.AppointStateEnum;
+import com.company.project.module.book.model.Appointment;
+import com.company.project.module.book.model.Book;
 import com.company.project.module.book.service.BookService;
 
 @Service
