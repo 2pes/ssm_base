@@ -75,5 +75,15 @@
 			ref="mappingJackson2HttpMessageConverter" />
 	</bean>
 
+	<!--swagger -->
+	<!--重要！将你的SwaggerConfig配置类注入 -->
+	<bean
+		class="com.company.project.configurer.swagger.SwaggerConfigurer" />
+	<!--重要！配置swagger资源不被拦截 -->
+	<mvc:resources mapping="swagger-ui.html"
+		location="classpath:/META-INF/resources/" />
+	<mvc:resources mapping="/webjars/**"
+		location="classpath:/META-INF/resources/webjars/" />
+
 
 </beans>

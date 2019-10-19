@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.company.project.core.model.Result;
+import com.company.project.core.Result;
 import com.company.project.module.book.dto.AppointExecution;
 import com.company.project.module.book.model.Book;
 import com.company.project.module.book.service.BookService;

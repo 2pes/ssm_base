@@ -3,6 +3,8 @@ package com.company.project.core.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.company.project.core.Result;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

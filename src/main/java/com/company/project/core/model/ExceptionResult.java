@@ -1,8 +1,9 @@
 package com.company.project.core.model;
 
-import com.company.project.core.model.Result;
+import com.company.project.core.Result;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -10,6 +11,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 public class ExceptionResult extends Exception {
 
 	// 系统统一使用的结果类，包括了 提示信息类型和信息内容
@@ -18,5 +20,9 @@ public class ExceptionResult extends Exception {
 		super(result.getMessage());
 		this.result = result;
 	}
+	public ExceptionResult(String message, Result result,Throwable cause) {
+        super(message, cause);
+        this.result = result;
+    }
 
 }

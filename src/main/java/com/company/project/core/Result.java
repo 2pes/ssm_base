@@ -1,8 +1,11 @@
-package com.company.project.core.model;
+package com.company.project.core;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,17 +23,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Result<T> {
 	public static final int TYPE_RESULT_FAIL = 0;// 失败
 	public static final int TYPE_RESULT_SUCCESS = 1;// 成功
 	public static final int TYPE_RESULT_WARN = 2;// 警告
 	public static final int TYPE_RESULT_INFO = 3;// 提示信息
-
 	private boolean success;// 是否成功标志
-
 	private T data;// 成功时返回的数据
-
 	private String error;// 错误信息
 
 	/**
@@ -42,7 +41,7 @@ public class Result<T> {
 	 * 提示代码
 	 */
 	private int messageCode;
-
+	private int code;
 	/**
 	 * 提示信息
 	 */
@@ -91,5 +90,29 @@ public class Result<T> {
 	public Result(boolean success, String error) {
 		this.success = success;
 		this.error = error;
+	}
+
+	public Result(ResultCode resultCode, String message) {
+		this.code = resultCode.code();
+		this.message = message;
+	}
+
+	public Result(ResultCode resultCode, String message, T data) {
+		this.code = resultCode.code();
+		this.message = message;
+		this.data = data;
+	}
+
+	@Override
+	public String toString() {
+		ObjectMapper mapper = new ObjectMapper();
+		String result = null;
+		try {
+			result = mapper.writeValueAsString(this);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return result;
+
 	}
 }

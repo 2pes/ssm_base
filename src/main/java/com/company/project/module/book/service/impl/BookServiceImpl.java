@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.company.project.core.Result;
 import com.company.project.core.model.ExceptionResult;
-import com.company.project.core.model.Result;
 import com.company.project.module.book.dao.AppointmentMapper;
 import com.company.project.module.book.dao.BookMapper;
 import com.company.project.module.book.dto.AppointExecution;
