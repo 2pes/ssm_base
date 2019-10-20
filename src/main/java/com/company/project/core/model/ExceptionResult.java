@@ -24,5 +24,6 @@ public class ExceptionResult extends Exception {
         super(message, cause);
         this.result = result;
     }
+	
 
 }

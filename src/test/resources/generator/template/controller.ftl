@@ -17,8 +17,8 @@ import ${basePackage}.core.Result;
 import ${basePackage}.core.ResultGenerator;
 import ${basePackage}.core.controller.BaseController;
 import ${basePackage}.core.model.QueryRequest;
-import ${basePackage}.module.sys.model.Menu;
-import ${basePackage}.module.sys.service.MenuService;
+import ${modulePackage}.model.${modelNameUpperCamel};
+import ${modulePackage}.service.${modelNameUpperCamel}Service;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

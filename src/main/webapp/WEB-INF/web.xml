@@ -4,7 +4,57 @@
 	version="3.1" metadata-complete="true">
 	<!-- 如果是用mvn命令生成的xml，需要修改servlet版本为3.1 -->
 	<display-name>ssm_perm</display-name>
-	 <!-- 2.编码过滤器 -->
+	 <!-- 配置spring容器监听器 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring/spring-*.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- 配置DispatcherServlet -->
+	<servlet>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 配置springMVC需要加载的配置文件
+			spring-dao.xml,spring-service.xml,spring-web.xml
+			Mybatis - > spring -> springmvc
+		 -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring/springmvc.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<!-- 默认匹配所有的请求 -->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<!-- shiro过滤器，
+		DelegatingFilterProxy代理会自动的到IOC容器找名字为shiroFilter的bean;
+		如果要修改bean的名字，可以设置targetBeanName的值，要注意的是必须与ShiroFilterFactoryBean的id值保持一致
+	 -->
+	<filter>
+		<filter-name>shiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<!-- 设置true由servlet容器控制filter的生命周期 -->
+		<init-param>
+			<param-name>targetFilterLifecycle</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<!-- 设置spring容器filter的bean id，如果不设置则找与filter-name一致的bean-->
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>shiroFilter</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+ <!--  编码过滤器 -->
     <filter>
         <filter-name>encoding</filter-name>
         <filter-class>
@@ -19,37 +69,12 @@
         <filter-name>encoding</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-	
-	<!-- 配置DispatcherServlet -->
-	<servlet>
-		<servlet-name>mvc-dispatcher</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<!-- 配置springMVC需要加载的配置文件
-			spring-dao.xml,spring-service.xml,spring-web.xml
-			Mybatis - > spring -> springmvc
-		 -->
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:spring/spring-*.xml</param-value>
-		</init-param>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>mvc-dispatcher</servlet-name>
-		<!-- 默认匹配所有的请求 -->
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
-	<!-- shiro过滤器，
-		DelegatingFilterProxy代理会自动的到IOC容器找名字为shiroFilter的bean;
-		如果要修改bean的名字，可以设置targetBeanName的值，要注意的是必须与ShiroFilterFactoryBean的id值保持一致
-	 -->
-	<!-- <filter>
-		<filter-name>shiroFilter</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>shiroFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
-
+<welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
 </web-app>
