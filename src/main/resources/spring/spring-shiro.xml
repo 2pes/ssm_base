@@ -25,7 +25,7 @@
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/login" />
-		<!-- <property name="successUrl" value="/index.jsp" /> --><!--不配置可以跳转到历史页  -->
+		<!-- <property name="successUrl" value="/index" /> --> <!--不配置可以跳转到历史页  -->
 		<property name="unauthorizedUrl" value="/refuse.jsp" />
 		<!-- shiro过滤器的具体配置 -->
 		<!-- anon-匿名访问，authc-需要认证 -->
@@ -42,8 +42,8 @@
 				<!-- 请求 logout.action地址，shiro去清除session-->
 				/logout = logout
 				<!--商品查询需要商品查询权限 ，取消url拦截配置，使用注解授权方式 -->
-				<!-- /items/queryItems.action = perms[item:query]
-				/items/editItems.action = perms[item:edit] -->
+				/module/mall/items/list = perms[item:query]
+				/module/mall/items/detail = perms[item:edit] -->
 				<!-- 配置记住我或认证通过可以访问的地址 -->
 				/index  = user
 				/first = user

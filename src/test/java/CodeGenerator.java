@@ -47,9 +47,16 @@ public class CodeGenerator {
     public static void main(String[] args) {
         //genCode("输入表名");
         //genCodeByCustomModelName("输入表名","输入自定义Model名称","日志模块名称");
-        genCodeByCustomModelName("sys_permission", "SysPermission", "权限");
-        genCodeByCustomModelName("sys_role", "SysRoleMenu", "角色菜单");
-        genCodeByCustomModelName("sys_user", "SysUser", "用户");
+		/*
+		 * genCodeByCustomModelName("sys_permission", "SysPermission", "权限");
+		 * genCodeByCustomModelName("sys_role", "SysRoleMenu", "角色菜单");
+		 * genCodeByCustomModelName("sys_user", "SysUser", "用户");
+		 */
+    	
+    	//genCodeByCustomModelName("m_user", "MallUser", "用户");
+    	genCodeByCustomModelName("m_items", "MallItems", "商品");
+    	//genCodeByCustomModelName("m_orders", "MallOrders", "用户订单");
+    	//genCodeByCustomModelName("m_orderdetail", "MallOrdersDdetail", "订单明细");
     }
 
     /**

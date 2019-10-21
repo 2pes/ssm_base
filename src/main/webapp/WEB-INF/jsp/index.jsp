@@ -32,8 +32,8 @@
 					href="#" class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-help'"> </a> <a href="#"
 					class="easyui-linkbutton"
-					data-options="plain:true,iconCls:'icon-save'">用户操作</a> <a href="#"
-					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-save'">用户操作</a> <a
+					href="javascript:logout();" class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-back'">退出</a>
 			</div>
 		</div>
@@ -47,56 +47,69 @@
 	</div>
 	<div data-options="region:'center'"
 		style="padding: 5px; background: #eee;">
-		<table class="easyui-datagrid" style="width: 100%; height: 100%"
-			data-options="rownumbers:true,singleSelect:true,pagination:true,url:'static/js/mock/datagrid_data.json',method:'get',toolbar:'#tb',footer:'#ft'">
-			<thead>
-				<tr>
-					<th data-options="field:'itemid',width:80">Item ID</th>
-					<th data-options="field:'productid',width:100">Product</th>
-					<th data-options="field:'listprice',width:80,align:'right'">List
-						Price</th>
-					<th data-options="field:'unitcost',width:80,align:'right'">Unit
-						Cost</th>
-					<th data-options="field:'attr1',width:240">Attribute</th>
-					<th data-options="field:'status',width:60,align:'center'">Status</th>
-				</tr>
-			</thead>
-		</table>
-		<div id="tb" style="padding: 2px 5px;">
-			Date From: <input class="easyui-datebox" style="width: 110px">
-			To: <input class="easyui-datebox" style="width: 110px">
-			Language: <select class="easyui-combobox" panelHeight="auto"
-				style="width: 100px">
-				<option value="java">Java</option>
-				<option value="c">C</option>
-				<option value="basic">Basic</option>
-				<option value="perl">Perl</option>
-				<option value="python">Python</option>
-			</select> <a href="#" class="easyui-linkbutton" iconCls="icon-search">Search</a>
+		<div id="contentDiv">
+			<table class="easyui-datagrid" style="width: 100%; height: 100%"
+				data-options="rownumbers:true,singleSelect:true,pagination:true,url:'static/js/mock/datagrid_data.json',method:'get',toolbar:'#tb',footer:'#ft'">
+				<thead>
+					<tr>
+						<th data-options="field:'itemid',width:80">Item ID</th>
+						<th data-options="field:'productid',width:100">Product</th>
+						<th data-options="field:'listprice',width:80,align:'right'">List
+							Price</th>
+						<th data-options="field:'unitcost',width:80,align:'right'">Unit
+							Cost</th>
+						<th data-options="field:'attr1',width:240">Attribute</th>
+						<th data-options="field:'status',width:60,align:'center'">Status</th>
+					</tr>
+				</thead>
+			</table>
+			<div id="tb" style="padding: 2px 5px;">
+				Date From: <input class="easyui-datebox" style="width: 110px">
+				To: <input class="easyui-datebox" style="width: 110px">
+				Language: <select class="easyui-combobox" panelHeight="auto"
+					style="width: 100px">
+					<option value="java">Java</option>
+					<option value="c">C</option>
+					<option value="basic">Basic</option>
+					<option value="perl">Perl</option>
+					<option value="python">Python</option>
+				</select> <a href="#" class="easyui-linkbutton" iconCls="icon-search">Search</a>
+			</div>
+			<div id="ft" style="padding: 2px 5px;">
+				<a href="javascript:void(0)" class="easyui-linkbutton"
+					iconCls="icon-add" plain="true"></a> <a href="javascript:void(0)"
+					class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+					onclick="toggledialog()"></a> <a href="javascript:void(0)"
+					class="easyui-linkbutton" iconCls="icon-save" plain="true"
+					onclick="toggledialog()"></a> <a href="javascript:void(0)"
+					class="easyui-linkbutton" iconCls="icon-cut" plain="true"></a> <a
+					href="javascript:void(0)" class="easyui-linkbutton"
+					iconCls="icon-remove" plain="true"></a>
+			</div>
 		</div>
-		<div id="ft" style="padding: 2px 5px;">
-			<a href="javascript:void(0)" class="easyui-linkbutton"
-				iconCls="icon-add" plain="true"></a> <a href="javascript:void(0)"
-				class="easyui-linkbutton" iconCls="icon-edit" plain="true"
-				onclick="toggledialog()"></a> <a href="javascript:void(0)"
-				class="easyui-linkbutton" iconCls="icon-save" plain="true"
-				onclick="toggledialog()"></a> <a href="javascript:void(0)"
-				class="easyui-linkbutton" iconCls="icon-cut" plain="true"></a> <a
-				href="javascript:void(0)" class="easyui-linkbutton"
-				iconCls="icon-remove" plain="true"></a>
-		</div>
-
 	</div>
 	<div id="dd"></div>
 </body>
 
 <script type="text/javascript">
 	var sidemenudata = [ {
+		text : '商品管理',
+		iconCls : 'icon-more',
+		children : [ {
+			text : '商品管理',
+			url : '/module/mall/items'
+		}, {
+			text : 'Option5'
+		}, {
+			text : 'Option6'
+		} ]
+	}, {
 		text : '系统管理',
 		iconCls : 'icon-sum',
 		state : 'open',
 		children : [ {
-			text : '人员管理'
+			text : '人员管理',
+			url : '/module/sys/user'
 		}, {
 			text : '角色管理'
 		}, {
@@ -134,7 +147,10 @@
 		})
 	}
 	function selectHandler(e, t, i) {
-		$('#dg').datagrid('reload');
+		debugger;
+		$('#contentDiv').empty();
+		console.log(e.url);
+		$('#dg').datagrid(e);
 	}
 	function toggledialog() {
 		$('#dd').dialog({
@@ -257,6 +273,31 @@
 			}
 		})
 		/* formObj.ajaxSubmit(options); */
+	};
+	//退出系统方法
+	function logout() {
+		_confirm('您确定要退出本系统吗?', null, function() {
+			location.href = '${ctx }/logout';
+		})
+	}
+
+	//帮助
+	function showhelp() {
+		window.open('${ctx }/help.html', '帮助文档');
+	}
+	var _confirm = function(question, method_cancel, method_ok) {
+		$.messager.confirm('系统提示', question, function(r) {
+			if (r) {
+				if (method_ok) {
+					method_ok();
+				}
+			} else {
+				if (method_cancel) {
+					method_cancel();
+				}
+			}
+		});
+
 	};
 </script>
 </html>

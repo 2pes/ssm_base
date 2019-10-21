@@ -16,7 +16,7 @@ public class LoginController {
 	@RequestMapping("login")
 	public String login(HttpServletRequest request) throws Exception {
 
-		// 如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
+		// 如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的权限定名
 		String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
 		// 根据shiro返回的异常类路径判断，抛出指定异常信息
 		if (exceptionClassName != null) {

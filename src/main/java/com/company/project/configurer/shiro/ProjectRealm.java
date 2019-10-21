@@ -12,63 +12,81 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-public class ProjectRealm extends AuthorizingRealm{
-	
+import com.company.project.module.sys.model.ActiveUser;
+import com.company.project.module.sys.model.SysPermission;
+
+public class ProjectRealm extends AuthorizingRealm {
+
 	// 设置realm的名称
-		@Override
-		public void setName(String name) {
-			super.setName("customRealm");
+	@Override
+	public void setName(String name) {
+		super.setName("customRealm");
+	}
+
+	// 用于认证
+	@Override
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+		// 从token中获取用户身份信息
+		String username = (String) token.getPrincipal();
+		// 拿着username从数据库中进行查询
+		// ....
+		// 如果查询不到返回null
+		if (!username.equals("zhangsan")) {
+			return null;
 		}
+		// 获取从数据库查询出来的用户密码
+		String password = "123"; // 这里使用静态数据进行测试
+		// 根据用户id从数据库中取出菜单
+		// ...先使用静态数据
+		List<SysPermission> menus = new ArrayList<SysPermission>();
+		
+		SysPermission sysPermission_1 = new SysPermission();
+		sysPermission_1.setName("商品管理");
+		sysPermission_1.setUrl("/module/mall/items");
+		
+		SysPermission sysPermission_2 = new SysPermission();
+		sysPermission_2.setName("用户管理");
+		sysPermission_2.setUrl("/module/sys/user");
+		
+		menus.add(sysPermission_1);
+		menus.add(sysPermission_2);
+		// 构建用户身份信息
+		ActiveUser activeUser = new ActiveUser();
+		activeUser.setUserid(username);
+		activeUser.setUsername(username);
+		activeUser.setUsercode(username);
+		activeUser.setMenus(menus);
+		// 返回认证信息由父类AuthenticationRealm进行认证
+		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(activeUser, password,
+				this.getName());
+		return simpleAuthenticationInfo;
+	}
 
-		// 用于认证
-		@Override
-		protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+	// 用于授权
+	@Override
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+		// 获取身份信息
+		ActiveUser activeUser = (ActiveUser) principals.getPrimaryPrincipal();
+		// 用户id
+		String userid = activeUser.getUserid();
+		// 根据用户id从数据库中查询权限数据
+		// ...这里使用静态数据模拟
+		List<String> permissions = new ArrayList<String>();
+		permissions.add("item:query");
+		permissions.add("item:update");
 
-			// token是用户输入的
-			// 第一步从token中取出身份信息
-			String userCode = (String) token.getPrincipal();
-
-			// 第二步：根据用户输入的userCode从数据库查询
-			// ....
-
-			// 如果查询不到返回null
-			// 数据库中用户账号是zhangsansan
-			/*
-			 * if(!userCode.equals("zhangsansan")){// return null; }
-			 */
-
-			// 模拟从数据库查询到密码
-			String password = "111112";
-
-			// 如果查询到返回认证信息AuthenticationInfo
-
-			SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userCode, password,
-					this.getName());
-
-			return simpleAuthenticationInfo;
+		// 将权限信息封装为AuthorizationInfo
+		SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+		// 基于资源权限的访问控制
+		for (String permission : permissions) {
+			simpleAuthorizationInfo.addStringPermission(permission);
 		}
+		// 如果基于角色进行访问控制
+		// for (String role : roles) {
+		// simpleAuthorizationInfo.addRole(role);
+		// }
 
-		// 用于授权
-		@Override
-		protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-			// 从 principals获取主身份信息
-			// 将getPrimaryPrincipal方法返回值转为真实身份类型（在上边的doGetAuthenticationInfo认证通过填充到SimpleAuthenticationInfo中身份类型），
-			String userCode = (String) principals.getPrimaryPrincipal();
-
-			// 根据身份信息获取权限信息
-			// 连接数据库...
-			// 模拟从数据库获取到数据
-			List<String> permissions = new ArrayList<String>();
-			permissions.add("user:create");// 用户的创建
-			permissions.add("items:add");// 商品添加权限
-			// ....
-
-			// 查到权限数据，返回授权信息(要包括 上边的permissions)
-			SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-			// 将上边查询到授权信息填充到simpleAuthorizationInfo对象中
-			simpleAuthorizationInfo.addStringPermissions(permissions);
-
-			return simpleAuthorizationInfo;
-		}
+		return simpleAuthorizationInfo;
+	}
 
 }
