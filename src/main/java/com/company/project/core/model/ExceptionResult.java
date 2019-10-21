@@ -20,8 +20,10 @@ public class ExceptionResult extends Exception {
 		super(result.getMessage());
 		this.result = result;
 	}
-	public ExceptionResult(String message, Result result,Throwable cause) {
+	public ExceptionResult(String message,Throwable cause) {
         super(message, cause);
+        result.setMessage(message);
+        result.setType(result.TYPE_RESULT_FAIL);
         this.result = result;
     }
 	

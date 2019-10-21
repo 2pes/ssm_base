@@ -35,6 +35,7 @@
 				/images/** = anon
 				/js/** = anon
 				/styles/** = anon
+				/webjars/** = anon
 				<!-- 验证码，可匿名访问 -->
 				/validatecode.jsp = anon
 				

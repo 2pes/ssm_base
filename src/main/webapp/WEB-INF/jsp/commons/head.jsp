@@ -4,7 +4,6 @@
 <script type="text/javascript" src="${ctx }/webjars/easyui-186/1.8.6/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx }/webjars/easyui-186/1.8.6/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${ctx }/webjars/easyui-186/1.8.6/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="${ctx }/webjars/easyui-186/1.8.6/plugins/jquery.form.js"></script>
 <script type="text/javascript">
 	var ctx = "${ctx }";
 	/* var cureentUser = "${user }"; */

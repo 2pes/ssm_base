@@ -77,10 +77,7 @@ public abstract class AbstractService<T> implements Service<T> {
 			field.set(model, value);
 			return mapper.selectOne(model);
 		} catch (ReflectiveOperationException e) {
-			Result result = new Result();
-			result.setType(Result.TYPE_RESULT_FAIL);
-			result.setMessage("返回的值太多");
-			throw new ExceptionResult(e.getMessage(),result, e);
+			throw new ExceptionResult(e.getMessage(), e);
 		}
 	}
 
