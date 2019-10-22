@@ -7,11 +7,13 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
@@ -35,6 +37,12 @@ public class MallItemsController extends BaseController {
     @Resource
     private MallItemsService mallItemsService;
 
+    @GetMapping()
+    @ApiOperation(value = "请求地址", notes = "商品列表地址")
+    public ModelAndView list() {
+        return new ModelAndView("/module/malll/items/list");
+    }
+    
     @PostMapping("/list")
     @ApiOperation(value = "列表", notes = "商品列表")
     public Result list(@RequestBody QueryRequest request) {

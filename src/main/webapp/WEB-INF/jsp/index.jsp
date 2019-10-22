@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Fluid Layout - jQuery EasyUI Demo</title>
+<title>index</title>
 
 <%@ include file="/WEB-INF/jsp/commons/head.jsp"%>
 <body class="easyui-layout">
@@ -48,8 +48,7 @@
 	<div data-options="region:'center'"
 		style="padding: 5px; background: #eee;">
 		<div id="contentDiv">
-			<table class="easyui-datagrid" style="width: 100%; height: 100%"
-				data-options="rownumbers:true,singleSelect:true,pagination:true,url:'static/js/mock/datagrid_data.json',method:'get',toolbar:'#tb',footer:'#ft'">
+			<table id="dg_index">
 				<thead>
 					<tr>
 						<th data-options="field:'itemid',width:80">Item ID</th>
@@ -149,8 +148,7 @@
 	function selectHandler(e, t, i) {
 		debugger;
 		$('#contentDiv').empty();
-		console.log(e.url);
-		$('#dg').datagrid(e);
+		$('#contentDiv').load(e.url);
 	}
 	function toggledialog() {
 		$('#dd').dialog({
@@ -191,7 +189,25 @@
 			data : sidemenudata,
 			onSelect : selectHandler
 		})
-		var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
+		
+		$('#dg'+'_index').datagrid({
+			url:'static/js/mock/datagrid_data.json',
+		    columns:[[
+		        {field:'itemid',title:'itemid',width:80},
+		        {field:'productid',title:'productid',width:100},
+		        {field:'listprice',title:'listprice',width:100,align:'right'},
+		        {field:'unitcost',title:'unitcost',width:80,align:'right'},
+		        {field:'attr1',title:'attr1',width:240,align:'right'},
+		        {field:'status',title:'status',width:80,align:'center'}
+		    ]],
+		    rownumbers:true,
+		    singleSelect:true,
+		    pagination:true,
+		    method:'get',
+		    toolbar:'#tb',
+		    footer:'#ft' 
+		});
+		var pager = $('#dg'+'_index').datagrid().datagrid('getPager'); // get the pager of datagrid
 		pager.pagination({
 			buttons : [ {
 				iconCls : 'icon-search',

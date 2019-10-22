@@ -154,7 +154,7 @@ public class AuthenticationTest {
 		// 盐
 		String salt = "qwerty";
 		// 散列次数
-		int hashIterations = 2;
+		int hashIterations = 1;
 		// 上边散列1次：f3694f162729b7d0254c6e40260bf15c
 		// 上边散列2次：36f2dfa24d0a9fa97276abbe13e596fc
 

@@ -15,4 +15,43 @@
     <result column="sortstring" jdbcType="VARCHAR" property="sortstring" />
     <result column="available" jdbcType="CHAR" property="available" />
   </resultMap>
+  <!-- 根据用户id查询url -->
+  <select id="findPermissionListByUserId" parameterType="string" resultType="com.company.project.module.sys.model.SysPermission">
+	  SELECT 
+	  * 
+	FROM
+	  sys_permission 
+	WHERE TYPE = 'permission' 
+	  AND id IN 
+	  (SELECT 
+	    sys_permission_id 
+	  FROM
+	    sys_role_permission 
+	  WHERE sys_role_id IN 
+	    (SELECT 
+	      sys_role_id 
+	    FROM
+	      sys_user_role 
+	    WHERE sys_user_id = #{id}))
+  </select>
+  
+   <!-- 根据用户id查询菜单 -->
+  <select id="findMenuListByUserId"  parameterType="string" resultType="com.company.project.module.sys.model.SysPermission">
+  		SELECT 
+	  * 
+	FROM
+	  sys_permission 
+	WHERE TYPE = 'menu' 
+	  AND id IN 
+	  (SELECT 
+	    sys_permission_id 
+	  FROM
+	    sys_role_permission 
+	  WHERE sys_role_id IN 
+	    (SELECT 
+	      sys_role_id 
+	    FROM
+	      sys_user_role 
+	    WHERE sys_user_id = #{id}))
+  </select>
 </mapper>

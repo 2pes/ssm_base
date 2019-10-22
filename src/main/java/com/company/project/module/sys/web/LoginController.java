@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.company.project.core.Result;
 import com.company.project.core.model.ExceptionResult;
@@ -13,7 +13,7 @@ import com.company.project.core.model.ExceptionResult;
 @Controller
 public class LoginController {
 
-	@RequestMapping("login")
+	@PostMapping("login")
 	public String login(HttpServletRequest request) throws Exception {
 
 		// 如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的权限定名
