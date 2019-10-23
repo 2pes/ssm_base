@@ -24,3 +24,9 @@
 	- http://localhost:8080/ssm/	
 	- http://localhost:8080/ssm/book/list	
 	- http://localhost:8080/ssm/book/1000/detail	
+
+## 3. 实体类生成
+1。 导入`generatorSqlmapCustom`项目。
+2。 修改`generatorConfig.xml`中的数据库连接项。
+3. 运行`GeneratorSqlmap.java`中`main`方法。
+4. 拷贝生成的代码到自己的项目目录。
