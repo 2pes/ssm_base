@@ -148,7 +148,7 @@
 	function selectHandler(e, t, i) {
 		debugger;
 		$('#contentDiv').empty();
-		$('#contentDiv').load(e.url);
+		$('#contentDiv').load(ctx + e.url);
 	}
 	function toggledialog() {
 		$('#dd').dialog({
@@ -189,25 +189,46 @@
 			data : sidemenudata,
 			onSelect : selectHandler
 		})
-		
-		$('#dg'+'_index').datagrid({
-			url:'static/js/mock/datagrid_data.json',
-		    columns:[[
-		        {field:'itemid',title:'itemid',width:80},
-		        {field:'productid',title:'productid',width:100},
-		        {field:'listprice',title:'listprice',width:100,align:'right'},
-		        {field:'unitcost',title:'unitcost',width:80,align:'right'},
-		        {field:'attr1',title:'attr1',width:240,align:'right'},
-		        {field:'status',title:'status',width:80,align:'center'}
-		    ]],
-		    rownumbers:true,
-		    singleSelect:true,
-		    pagination:true,
-		    method:'get',
-		    toolbar:'#tb',
-		    footer:'#ft' 
+
+		$('#dg_' + 'index').datagrid({
+			url : ctx+'/static/js/mock/datagrid_data.json',
+			columns : [ [ {
+				field : 'itemid',
+				title : 'itemid',
+				width : 80
+			}, {
+				field : 'productid',
+				title : 'productid',
+				width : 100
+			}, {
+				field : 'listprice',
+				title : 'listprice',
+				width : 100,
+				align : 'right'
+			}, {
+				field : 'unitcost',
+				title : 'unitcost',
+				width : 80,
+				align : 'right'
+			}, {
+				field : 'attr1',
+				title : 'attr1',
+				width : 240,
+				align : 'right'
+			}, {
+				field : 'status',
+				title : 'status',
+				width : 80,
+				align : 'center'
+			} ] ],
+			rownumbers : true,
+			singleSelect : true,
+			pagination : true,
+			method : 'get',
+			toolbar : '#tb',
+			footer : '#ft'
 		});
-		var pager = $('#dg'+'_index').datagrid().datagrid('getPager'); // get the pager of datagrid
+		var pager = $('#dg' + '_index').datagrid().datagrid('getPager'); // get the pager of datagrid
 		pager.pagination({
 			buttons : [ {
 				iconCls : 'icon-search',

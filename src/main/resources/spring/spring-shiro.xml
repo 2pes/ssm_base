@@ -28,13 +28,14 @@
 	<bean id="shiroFilter"
 		class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/login" />
-		<!-- <property name="successUrl" value="/index" /> --> <!--不配置可以跳转到历史页 -->
+		<property name="loginUrl" value="/login.jsp" />
+		<property name="successUrl" value="/" />  <!--不配置可以跳转到历史页 -->
 		<property name="unauthorizedUrl" value="/refuse.jsp" />
 		<!-- shiro过滤器的具体配置 -->
 		<!-- anon-匿名访问，authc-需要认证 -->
 		<property name="filterChainDefinitions">
 			<value>
+				/login = anon
 				<!-- 对静态资源设置匿名访问 -->
 				/images/** = anon
 				/js/** = anon

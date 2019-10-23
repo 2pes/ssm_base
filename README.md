@@ -151,3 +151,7 @@ pom.xml修改build节点
 	- [ ] shiro 
 	- [ ] quartz  
 
+## 参考
+https://www.sojson.com/shiro	
+https://www.cnblogs.com/learnhow/p/5694876.html		
+https://blog.csdn.net/puhaiyang/article/details/51753925	
