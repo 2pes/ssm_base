@@ -145,6 +145,7 @@ pom.xml修改build节点
 ## 目标
 1. 整合框架
 	- [x] ssm: [v1.0](https://github.com/maxmarvel/ssm_base/archive/v1.0.zip)
+	- [x] druid
 	- [x] 通用mapper 
 	- [x] 代码生成器 
 	- [x] swagger: [v2.0](https://github.com/maxmarvel/ssm_base/archive/v2.0.zip)
