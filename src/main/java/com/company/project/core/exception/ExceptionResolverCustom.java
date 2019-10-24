@@ -84,7 +84,7 @@ public class ExceptionResolverCustom implements HandlerExceptionResolver {
 		// 转向错误页面
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("exceptionResultInfo", exceptionResultInfo.getResult());
-		modelAndView.setViewName("/error");// 逻辑视图名
+		modelAndView.setViewName("error");// 逻辑视图名
 		return modelAndView;
 	}
 

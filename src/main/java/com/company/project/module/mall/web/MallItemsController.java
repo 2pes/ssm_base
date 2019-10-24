@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,6 +63,7 @@ public class MallItemsController extends BaseController {
 	}
 
 	@PostMapping("/add")
+	@RequiresPermissions("item:create")
 	@ApiOperation(value = "新增", notes = "商品新增")
 	public Result add(MallItems mallItems) {
 		try {
@@ -86,6 +88,7 @@ public class MallItemsController extends BaseController {
 	}
 
 	@PostMapping("/update")
+	@RequiresPermissions("item:update")
 	@ApiOperation(value = "修改", notes = "商品修改")
 	public Result update(MallItems mallItems) {
 		try {
