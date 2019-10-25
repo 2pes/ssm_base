@@ -1,5 +1,8 @@
 package com.company.project.core.util;
 
+import java.util.Map;
+
+import org.apache.commons.beanutils.BeanMap;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.crypto.hash.SimpleHash;
 
@@ -22,4 +25,15 @@ public class ProjectUtils {
 		System.out.println(simpleHash.toString());
 		return md5Hash.toString();
 	}
+	 /**
+     * map转对象
+     * @param obj
+     * @return
+     */
+    public static Map<?, ?> objectToMap(Object obj) {
+        if (obj == null) {
+            return null;
+        }
+        return new BeanMap(obj);
+    }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import com.company.project.module.sys.model.ActiveUser;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -27,9 +28,9 @@ public class BaseController {
 		return SecurityUtils.getSubject();
 	}
 
-	protected SysUser getCurrentUser() {
+	protected ActiveUser getCurrentUser() {
 		Object object = getSubject().getPrincipal();
-		SysUser user = new SysUser();
+		ActiveUser user = new ActiveUser();
 		try {
 			PropertyUtils.copyProperties(user, object);
 		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {

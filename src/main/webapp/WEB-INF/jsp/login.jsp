@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>login2</title>
+<title>login</title>
 
 <script type="text/javascript"
 	src="${ctx }/webjars/easyui-186/1.8.6/jquery.min.js"></script>

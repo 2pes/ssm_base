@@ -23,6 +23,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<!-- 自定义的spring的版本号 -->
 		<spring.version>4.3.14.RELEASE</spring.version>
+		<aspectjweaver.version>1.9.2</aspectjweaver.version>
 		<!-- 自定义的mybaits的版本号 -->
 		<mybatis.version>3.4.6</mybatis.version>
 		<!-- 自定义的mybaits-spring的版本号 -->
@@ -50,9 +51,12 @@
 
 		<guava.version>23.0</guava.version>
 		<hutool.version>4.6.1</hutool.version>
+		<swagger2.version>2.7.0</swagger2.version>
 
 		<easyui-186.version>1.8.6</easyui-186.version>
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+		<tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
+		<tomcat.port>8088</tomcat.port>
 	</properties>
 
 	<dependencies>
@@ -98,7 +102,11 @@
 			<scope>compile</scope>
 		</dependency>
 
-
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectjweaver.version}</version>
+		</dependency>
 		<!-- 3.Servlet web -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -212,7 +220,7 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
-			<version>2.7.0</version>
+			<version>${swagger2.version}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>spring-context</artifactId>
@@ -244,7 +252,7 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.7.0</version>
+			<version>${swagger2.version}</version>
 		</dependency>
 		<!-- shiro -->
         <dependency>
@@ -327,14 +335,14 @@
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
+				<version>${tomcat7-maven-plugin.version}</version>
 				<configuration>
-					<url>http://localhost:8080/manager/text</url>
+					<url>http://localhost:8088/manager/text</url>
 					<server>tomcat7</server>
 					<username>tomcat</username>
 					<password>tomcat</password>
-					<port>8080</port>
-					<path>/ssm_perm</path>
+					<port>${tomcat.port}</port>
+					<path>/${name}</path>
 				</configuration>
 			</plugin>
 			<!-- 配置打包时跳过测试 ，首次配置使用的时候会自动联网进行下载 -->

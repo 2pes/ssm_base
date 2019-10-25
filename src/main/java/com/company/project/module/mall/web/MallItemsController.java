@@ -67,6 +67,7 @@ public class MallItemsController extends BaseController {
 	@ApiOperation(value = "新增", notes = "商品新增")
 	public Result add(MallItems mallItems) {
 		try {
+
 			mallItemsService.save(mallItems);
 			return ResultGenerator.genSuccessResult();
 		} catch (Exception e) {

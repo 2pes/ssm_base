@@ -16,7 +16,7 @@
 	-- 刷新权限
 	flush privileges;
 	```		
-2. 导入执sql目录下的`schema.sql`文件。
+2. 导入执sql目录下的`ssm_base.sql`文件。
 
 ## 2. 项目导入
 1. 以maven项目导入eclipse或idea。
@@ -151,7 +151,12 @@ pom.xml修改build节点
 	- [x] swagger: [v2.0](https://github.com/maxmarvel/ssm_base/archive/v2.0.zip)
 	- [ ] shiro 
 	- [ ] quartz  
-
+2. 整合功能
+	- [ ] jquery，easyui框架后台界面
+	- [ ] 用户管理
+	- [ ] 角色管理
+	- [ ] 权限管理
+	- [ ] 日志管理
 ## 参考
 https://www.sojson.com/shiro	
 https://www.cnblogs.com/learnhow/p/5694876.html		

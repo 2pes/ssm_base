@@ -1,6 +1,10 @@
 package com.company.project.module.sys.service;
+import com.company.project.core.model.EasyUITreeNode;
+import com.company.project.module.sys.model.ActiveUser;
 import com.company.project.module.sys.model.SysPermission;
 import com.company.project.core.Service;
+
+import java.util.List;
 
 
 /**
@@ -8,4 +12,10 @@ import com.company.project.core.Service;
  */
 public interface SysPermissionService extends Service<SysPermission> {
 
+    /**
+     * 根据用户角色查询菜单
+     * @param currentUser
+     * @return
+     */
+    List<EasyUITreeNode<EasyUITreeNode>> getMenusByUser(ActiveUser currentUser);
 }
