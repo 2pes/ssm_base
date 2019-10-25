@@ -28,7 +28,16 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     private String hello(Model model) {
 
-        return "hello";// WEB-INF/jsp/"list".jsp
+        return "hello";
+    }
+
+    @RequestMapping(value = "/refuse", method = RequestMethod.GET)
+    private String refuse() {
+        return "refuse";
+    }
+    @RequestMapping(value = "/validatecode", method = RequestMethod.GET)
+    private String validatecode() {
+        return "validatecode";
     }
 
 }

@@ -5,13 +5,10 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
@@ -22,10 +19,11 @@ import com.company.project.module.sys.service.SysUserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
-* Created by company.chen on 2019/10/20.
-*/
+ * Created by company.chen on 2019/10/20.
+ */
 @RestController
 @RequestMapping("/module/sys/user")
 @Api(description = "用户管理")
@@ -35,9 +33,17 @@ public class SysUserController extends BaseController {
     @Resource
     private SysUserService sysUserService;
 
+    @GetMapping()
+    @ApiOperation(value = "请求地址", notes = "用户列表地址")
+    @RequiresPermissions("user:query")
+    public ModelAndView list() {
+        return new ModelAndView("/module/sys/user/list");
+    }
+
     @PostMapping("/list")
+    @RequiresPermissions("user:query")
     @ApiOperation(value = "列表", notes = "用户列表")
-    public Result list(@RequestBody QueryRequest request) {
+    public Result list(QueryRequest request) {
         try {
             Map<String, Object> result = super.selectByPageNumSize(request, () -> this.sysUserService.findAll());
             return ResultGenerator.genSuccessResult(result);
@@ -49,7 +55,7 @@ public class SysUserController extends BaseController {
 
     @PostMapping("/detail")
     @ApiOperation(value = "明细", notes = "用户详细数据")
-    public Result detail(@RequestParam String id) {
+    public Result detail(String id) {
         SysUser sysUser = sysUserService.findById(id);
         return ResultGenerator.genSuccessResult(sysUser);
     }
@@ -60,7 +66,7 @@ public class SysUserController extends BaseController {
         try {
             sysUserService.save(sysUser);
             return ResultGenerator.genSuccessResult();
-          } catch (Exception e) {
+        } catch (Exception e) {
             logger.error("新增用户信息失败", e);
             return ResultGenerator.genFailResult("新增用户信息失败，请联系网站管理员！");
         }
@@ -68,23 +74,24 @@ public class SysUserController extends BaseController {
 
     @PostMapping("/delete")
     @ApiOperation(value = "删除", notes = "用户删除")
-    public Result delete(@RequestParam String id) {
+    public Result delete(String id) {
         try {
             sysUserService.deleteById(id);
             return ResultGenerator.genSuccessResult();
-          } catch (Exception e) {
+        } catch (Exception e) {
             logger.error("删除用户信息失败", e);
             return ResultGenerator.genFailResult("删除用户信息失败，请联系网站管理员！");
         }
     }
 
     @PostMapping("/update")
+    @RequiresPermissions("user:update")
     @ApiOperation(value = "修改", notes = "用户修改")
     public Result update(SysUser sysUser) {
         try {
             sysUserService.update(sysUser);
             return ResultGenerator.genSuccessResult();
-          } catch (Exception e) {
+        } catch (Exception e) {
             logger.error("修改用户信息失败", e);
             return ResultGenerator.genFailResult("修改用户信息失败，请联系网站管理员！");
         }

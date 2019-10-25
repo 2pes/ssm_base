@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jsp/commons/taglib.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -9,6 +8,9 @@
 
     <%@ include file="/WEB-INF/jsp/commons/head.jsp" %>
 <body class="easyui-layout">
+<div id="loading" style="position:absolute;z-index:1000;top:0px;left:0px;width:100%;height:100%;background:#DDDDDB;text-align :center;padding-top:20%;">
+    <h1><font color="#15428B">加载中....</font></h1>
+</div>
 <div data-options="region:'north',split:false" style="height: 80px;">
     <div style="padding-left: 20px;">
         <h2>标题</h2>
@@ -49,8 +51,7 @@
 
 </div>
 <div data-options="region:'center'"
-     style="padding: 5px; background: #eee;">
-    <div id="contentDiv">
+     style="padding: 5px; background: #eee;" id="contentDiv">
         <table id="dg_index">
             <thead>
             <tr>
@@ -91,13 +92,23 @@
                 href="javascript:void(0)" class="easyui-linkbutton"
                 iconCls="icon-remove" plain="true"></a>
         </div>
-    </div>
 </div>
 <div id="dd"></div>
 </body>
 
 <script type="text/javascript">
+    var pc;
+    //不要放在$(function(){});中
+    $.parser.onComplete = function () {
+        if (pc) clearTimeout(pc);
+        pc = setTimeout(closes, 10);
+    };
 
+    function closes() {
+        $('#loading').fadeOut('normal', function () {
+            $(this).remove();
+        });
+    }
     var sidemenudata = [{
         text: '商品管理',
         iconCls: 'icon-more',
@@ -117,13 +128,17 @@
             text: '人员管理',
             url: '/module/sys/user'
         }, {
-            text: '角色管理'
+            text: '角色管理',
+            url: '/module/sys/role'
         }, {
-            text: '菜单管理'
+            text: '菜单管理',
+            url: '/module/sys/permission'
         }, {
-            text: '日志管理'
+            text: '日志管理',
+            url: '/module/sys/log'
         }, {
-            text: '字典管理'
+            text: '字典管理',
+            url: '/module/sys/dict'
         }, {
             text: '任务管理',
             children: [{
@@ -376,7 +391,7 @@
             success: function (backData) {
                 if (backData.code === 200) {
                     $('#sm').sidemenu({
-                        data: backData.data,
+                        data: sidemenudata,
                         onSelect: selectHandler
                     })
                 } else {

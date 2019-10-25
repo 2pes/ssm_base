@@ -7,11 +7,7 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
@@ -22,10 +18,11 @@ import com.company.project.module.sys.service.SysRoleMenuService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
-* Created by company.chen on 2019/10/20.
-*/
+ * Created by company.chen on 2019/10/20.
+ */
 @RestController
 @RequestMapping("/module/sys/role/menu")
 @Api(description = "角色菜单管理")
@@ -34,6 +31,12 @@ public class SysRoleMenuController extends BaseController {
 
     @Resource
     private SysRoleMenuService sysRoleMenuService;
+
+    @GetMapping()
+    @ApiOperation(value = "请求地址", notes = "角色列表地址")
+    public ModelAndView list() {
+        return new ModelAndView("/module/sys/role/list");
+    }
 
     @PostMapping("/list")
     @ApiOperation(value = "列表", notes = "角色菜单列表")
@@ -60,7 +63,7 @@ public class SysRoleMenuController extends BaseController {
         try {
             sysRoleMenuService.save(sysRoleMenu);
             return ResultGenerator.genSuccessResult();
-          } catch (Exception e) {
+        } catch (Exception e) {
             logger.error("新增角色菜单信息失败", e);
             return ResultGenerator.genFailResult("新增角色菜单信息失败，请联系网站管理员！");
         }
@@ -72,7 +75,7 @@ public class SysRoleMenuController extends BaseController {
         try {
             sysRoleMenuService.deleteById(id);
             return ResultGenerator.genSuccessResult();
-          } catch (Exception e) {
+        } catch (Exception e) {
             logger.error("删除角色菜单信息失败", e);
             return ResultGenerator.genFailResult("删除角色菜单信息失败，请联系网站管理员！");
         }
@@ -84,7 +87,7 @@ public class SysRoleMenuController extends BaseController {
         try {
             sysRoleMenuService.update(sysRoleMenu);
             return ResultGenerator.genSuccessResult();
-          } catch (Exception e) {
+        } catch (Exception e) {
             logger.error("修改角色菜单信息失败", e);
             return ResultGenerator.genFailResult("修改角色菜单信息失败，请联系网站管理员！");
         }

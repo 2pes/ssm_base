@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -90,16 +91,18 @@ public class ExceptionResolverCustom implements HandlerExceptionResolver {
 
 	// 异常信息解析方法
 	private ExceptionResult resolveExceptionCustom(Exception ex) {
-		Result<Object> resultInfo = null;
+		Result resultInfo = null;
 		if (ex instanceof ExceptionResult) {
 			// 抛出的是系统自定义异常
 			resultInfo = ((ExceptionResult) ex).getResult();
-		} else {
+		} else if (ex instanceof UnauthorizedException){
+			resultInfo.setMessage("没有权限");
+
+		}else {
 			// 重新构造“未知错误”异常
-			resultInfo = new Result<Object>();
+			resultInfo = new Result();
 			resultInfo.setType(Result.TYPE_RESULT_FAIL);
-			resultInfo.setData(
-					new AppointExecution(AppointStateEnum.INNER_ERROR.getState(), AppointStateEnum.INNER_ERROR));
+			resultInfo.setData(new AppointExecution(AppointStateEnum.INNER_ERROR.getState(), AppointStateEnum.INNER_ERROR));
 			resultInfo.setMessage("未知错误！" + AppointStateEnum.INNER_ERROR.getStateInfo());
 		}
 

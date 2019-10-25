@@ -2,6 +2,7 @@ package com.company.project.module.sys.web;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.company.project.configurer.shiro.ProjectRealm;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -25,6 +26,9 @@ public class LoginController extends BaseController {
 
 	@Autowired
 	private SysUserService sysUserService;
+	@Autowired
+	private ProjectRealm projectRealm;
+
 /*
 	@PostMapping("loginto")
 	public String login(@RequestParam("username") String username, @RequestParam("password") String password)
@@ -86,4 +90,12 @@ public class LoginController extends BaseController {
 
 	}
 
+
+	@RequestMapping("/clearShiroCache")
+	public String clearShiroCache(){
+
+		//清除缓存，将来正常开发要在service调用customRealm.clearCached()
+		projectRealm.clearCached();
+		return "success";
+	}
 }

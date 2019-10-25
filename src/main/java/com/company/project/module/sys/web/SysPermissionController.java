@@ -20,6 +20,7 @@ import com.company.project.module.sys.service.SysPermissionService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by company.chen on 2019/10/20.
@@ -32,6 +33,12 @@ public class SysPermissionController extends BaseController {
 
     @Resource
     private SysPermissionService sysPermissionService;
+
+    @GetMapping()
+    @ApiOperation(value = "请求地址", notes = "菜单权限列表地址")
+    public ModelAndView list() {
+        return new ModelAndView("/module/sys/permission/list");
+    }
 
     @PostMapping("/list")
     @ApiOperation(value = "列表", notes = "权限列表")

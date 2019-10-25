@@ -39,12 +39,14 @@ public class MallItemsController extends BaseController {
 
 	@GetMapping()
 	@ApiOperation(value = "请求地址", notes = "商品列表地址")
+	@RequiresPermissions("item:query")
 	public ModelAndView list() {
 		return new ModelAndView("/module/mall/items/list");
 	}
 
 	@PostMapping("/list")
 	@ApiOperation(value = "列表", notes = "商品列表")
+	@RequiresPermissions("item:query")
 	public Result list(QueryRequest queryres) {
 		try {
 			Map<String, Object> result = super.selectByPageNumSize(queryres, () -> this.mallItemsService.findAll());

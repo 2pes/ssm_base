@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd
@@ -12,87 +12,86 @@
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/aop 
 		http://www.springframework.org/schema/aop/spring-aop.xsd ">
-	<!-- 配置SpringMVC -->
-	<!-- 1.开启SpringMVC注解模式 -->
-	<!-- 简化配置： (1)自动注册DefaultAnootationHandlerMapping,AnotationMethodHandlerAdapter 
-		(2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持 -->
-	<mvc:annotation-driven>
-		<mvc:message-converters>
-			<ref bean="stringHttpMessageConverter" />
-			<ref bean="mappingJackson2HttpMessageConverter" />
-		</mvc:message-converters>
-	</mvc:annotation-driven>
+    <!-- 配置SpringMVC -->
+    <!-- 1.开启SpringMVC注解模式 -->
+    <!-- 简化配置： (1)自动注册DefaultAnootationHandlerMapping,AnotationMethodHandlerAdapter
+        (2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持 -->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <ref bean="stringHttpMessageConverter"/>
+            <ref bean="mappingJackson2HttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
-	<!-- 2.静态资源默认servlet配置 (1)加入对静态资源的处理：js,gif,png (2)允许使用"/"做整体映射 -->
-	<mvc:default-servlet-handler />
-
-
-	<!--过滤静态资源 -->
-	<!-- <mvc:resources location="/css" mapping="/css/**"/> <mvc:resources location="/images/" 
-		mapping="/images/**"/> <mvc:resources location="/js/" mapping="/js/**"/> -->
+    <!-- 2.静态资源默认servlet配置 (1)加入对静态资源的处理：js,gif,png (2)允许使用"/"做整体映射 -->
+    <mvc:default-servlet-handler/>
 
 
-
-	<!-- 3.配置jsp 显示ViewResolver -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-
-	<!-- 4.扫描web相关的bean -->
-	<context:component-scan
-		base-package="com.company.project.module.**.web" />
+    <!--过滤静态资源 -->
+    <!-- <mvc:resources location="/css" mapping="/css/**"/> <mvc:resources location="/images/"
+        mapping="/images/**"/> <mvc:resources location="/js/" mapping="/js/**"/> -->
 
 
-	<bean id="stringHttpMessageConverter"
-		class="org.springframework.http.converter.StringHttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
-				<value>text/plain;charset=UTF-8</value>
-				<value>text/html;charset=UTF-8</value>
-				<value>text/css;charset=UTF-8</value>
-			</list>
-		</property>
-	</bean>
-	<!-- json转换器 --> <!--解决IE浏览器json文件下载和json数据中午乱码的问题 -->
-	<bean id="mappingJackson2HttpMessageConverter"
-		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
-				<value>text/html;charset=UTF-8</value>
-				<value>text/json;charset=UTF-8</value>
-				<value>application/json;charset=UTF-8</value>
-				<value>application/x-www-form-urlencoded; charset=UTF-8</value>
-			</list>
-		</property>
-	</bean>
+    <!-- 3.配置jsp 显示ViewResolver -->
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
 
-	<!-- 统一异常处理类 -->
-	<bean id="handlerExceptionResolver"
-		class="com.company.project.core.exception.ExceptionResolverCustom">
-		<!-- 注入一个json转换器 -->
-		<property name="jsonMessageConverter"
-			ref="mappingJackson2HttpMessageConverter" />
-	</bean>
+    <!-- 4.扫描web相关的bean -->
+    <context:component-scan
+            base-package="com.company.project.module.**.web"/>
 
-	<!--swagger -->
-	<!--重要！将你的SwaggerConfig配置类注入 -->
-	<bean
-		class="com.company.project.configurer.swagger.SwaggerConfigurer" />
-	<!--重要！配置swagger资源不被拦截 -->
-	<mvc:resources mapping="swagger-ui.html"
-		location="classpath:/META-INF/resources/" />
-	<mvc:resources mapping="/webjars/**"
-		location="classpath:/META-INF/resources/webjars/" />
 
-	<!-- 开启aop，对类代理 -->
-	<aop:config proxy-target-class="true"></aop:config>
-	<!-- 开启shiro注解支持 -->
-	<bean
-	class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-	<property name="securityManager" ref="securityManager" />
-</bean>
+    <bean id="stringHttpMessageConverter"
+          class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=UTF-8</value>
+                <value>text/html;charset=UTF-8</value>
+                <value>text/css;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <!-- json转换器 --> <!--解决IE浏览器json文件下载和json数据中午乱码的问题 -->
+    <bean id="mappingJackson2HttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+                <value>text/json;charset=UTF-8</value>
+                <value>application/json;charset=UTF-8</value>
+                <value>application/x-www-form-urlencoded; charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 统一异常处理类 -->
+    <bean id="handlerExceptionResolver"
+          class="com.company.project.core.exception.ExceptionResolverCustom">
+        <!-- 注入一个json转换器 -->
+        <property name="jsonMessageConverter"
+                  ref="mappingJackson2HttpMessageConverter"/>
+    </bean>
+
+    <!--swagger -->
+    <!--重要！将你的SwaggerConfig配置类注入 -->
+    <bean
+            class="com.company.project.configurer.swagger.SwaggerConfigurer"/>
+    <!--重要！配置swagger资源不被拦截 -->
+    <mvc:resources mapping="swagger-ui.html"
+                   location="classpath:/META-INF/resources/"/>
+    <mvc:resources mapping="/webjars/**"
+                   location="classpath:/META-INF/resources/webjars/"/>
+
+    <!-- 开启aop，对类代理 -->
+    <aop:config proxy-target-class="true"></aop:config>
+    <!-- 开启shiro注解支持 -->
+    <!-- 开启shiro注解支持 -->
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 </beans>
