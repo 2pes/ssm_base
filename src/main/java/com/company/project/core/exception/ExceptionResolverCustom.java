@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.session.ExpiredSessionException;
+import org.apache.shiro.session.UnknownSessionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -73,6 +75,18 @@ public class ExceptionResolverCustom implements HandlerExceptionResolver {
 			// 将异常信息转json输出
 			return this.resolveJsonException(request, response, handlerMethod, ex);
 
+		}
+		if(ex instanceof UnauthorizedException){
+			//无权限异常
+			//todo 改为json输出
+			ModelAndView mv = new ModelAndView("refuse");
+			return mv;
+		}
+		if(ex instanceof ExpiredSessionException){
+			//无权限异常
+			//todo 改为json输出
+			ModelAndView mv = new ModelAndView("refuse");
+			return mv;
 		}
 		// 这里说明action返回的是jsp页面
 

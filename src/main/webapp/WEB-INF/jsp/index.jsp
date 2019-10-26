@@ -8,9 +8,7 @@
 
     <%@ include file="/WEB-INF/jsp/commons/head.jsp" %>
 <body class="easyui-layout">
-<div id="loading" style="position:absolute;z-index:1000;top:0px;left:0px;width:100%;height:100%;background:#DDDDDB;text-align :center;padding-top:20%;">
-    <h1><font color="#15428B">加载中....</font></h1>
-</div>
+<%@ include file="/WEB-INF/jsp/commons/loadingDiv.jsp" %>
 <div data-options="region:'north',split:false" style="height: 80px;">
     <div style="padding-left: 20px;">
         <h2>标题</h2>
@@ -97,18 +95,7 @@
 </body>
 
 <script type="text/javascript">
-    var pc;
-    //不要放在$(function(){});中
-    $.parser.onComplete = function () {
-        if (pc) clearTimeout(pc);
-        pc = setTimeout(closes, 10);
-    };
 
-    function closes() {
-        $('#loading').fadeOut('normal', function () {
-            $(this).remove();
-        });
-    }
     var sidemenudata = [{
         text: '商品管理',
         iconCls: 'icon-more',
