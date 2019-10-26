@@ -50,46 +50,46 @@
 </div>
 <div data-options="region:'center'"
      style="padding: 5px; background: #eee;" id="contentDiv">
-        <table id="dg_index">
-            <thead>
-            <tr>
-                <th data-options="field:'itemid',width:80">Item ID</th>
-                <th data-options="field:'productid',width:100">Product</th>
-                <th data-options="field:'listprice',width:80,align:'right'">List
-                    Price
-                </th>
-                <th data-options="field:'unitcost',width:80,align:'right'">Unit
-                    Cost
-                </th>
-                <th data-options="field:'attr1',width:240">Attribute</th>
-                <th data-options="field:'status',width:60,align:'center'">Status</th>
-            </tr>
-            </thead>
-        </table>
-        <div id="tb" style="padding: 2px 5px;">
-            Date From: <input class="easyui-datebox" style="width: 110px">
-            To: <input class="easyui-datebox" style="width: 110px">
-            Language: <select class="easyui-combobox" panelHeight="auto"
-                              style="width: 100px">
-            <option value="java">Java</option>
-            <option value="c">C</option>
-            <option value="basic">Basic</option>
-            <option value="perl">Perl</option>
-            <option value="python">Python</option>
-        </select> <a href="#" class="easyui-linkbutton" iconCls="icon-search">Search</a>
-        </div>
-        <div id="ft" style="padding: 2px 5px;">
-            <a href="javascript:void(0)" class="easyui-linkbutton"
-               iconCls="icon-add" plain="true"></a> <a href="javascript:void(0)"
-                                                       class="easyui-linkbutton" iconCls="icon-edit" plain="true"
-                                                       onclick="toggledialog()"></a> <a href="javascript:void(0)"
-                                                                                        class="easyui-linkbutton" iconCls="icon-save" plain="true"
-                                                                                        onclick="toggledialog()"></a> <a href="javascript:void(0)"
-                                                                                                                         class="easyui-linkbutton" iconCls="icon-cut"
-                                                                                                                         plain="true"></a> <a
-                href="javascript:void(0)" class="easyui-linkbutton"
-                iconCls="icon-remove" plain="true"></a>
-        </div>
+    <table id="dg_index">
+        <thead>
+        <tr>
+            <th data-options="field:'itemid',width:80">Item ID</th>
+            <th data-options="field:'productid',width:100">Product</th>
+            <th data-options="field:'listprice',width:80,align:'right'">List
+                Price
+            </th>
+            <th data-options="field:'unitcost',width:80,align:'right'">Unit
+                Cost
+            </th>
+            <th data-options="field:'attr1',width:240">Attribute</th>
+            <th data-options="field:'status',width:60,align:'center'">Status</th>
+        </tr>
+        </thead>
+    </table>
+    <div id="tb" style="padding: 2px 5px;">
+        Date From: <input class="easyui-datebox" style="width: 110px">
+        To: <input class="easyui-datebox" style="width: 110px">
+        Language: <select class="easyui-combobox" panelHeight="auto"
+                          style="width: 100px">
+        <option value="java">Java</option>
+        <option value="c">C</option>
+        <option value="basic">Basic</option>
+        <option value="perl">Perl</option>
+        <option value="python">Python</option>
+    </select> <a href="#" class="easyui-linkbutton" iconCls="icon-search">Search</a>
+    </div>
+    <div id="ft" style="padding: 2px 5px;">
+        <a href="javascript:void(0)" class="easyui-linkbutton"
+           iconCls="icon-add" plain="true"></a> <a href="javascript:void(0)"
+                                                   class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+                                                   onclick="toggledialog()"></a> <a href="javascript:void(0)"
+                                                                                    class="easyui-linkbutton" iconCls="icon-save" plain="true"
+                                                                                    onclick="toggledialog()"></a> <a href="javascript:void(0)"
+                                                                                                                     class="easyui-linkbutton" iconCls="icon-cut"
+                                                                                                                     plain="true"></a> <a
+            href="javascript:void(0)" class="easyui-linkbutton"
+            iconCls="icon-remove" plain="true"></a>
+    </div>
 </div>
 <div id="dd"></div>
 </body>
@@ -157,7 +157,12 @@
 
     function selectHandler(e, t, i) {
         $('#contentDiv').empty();
-        $('#contentDiv').load(ctx + e.url);
+        $('#contentDiv').load(ctx + e.url, function (response, status, xhr) {
+                if (status == "success") {
+                } else {
+                    message_alert(statusText);
+                }
+            });
     }
 
     function toggledialog() {

@@ -1,4 +1,4 @@
-package com.company.project.configurer.shiro;
+package com.company.project.configurer.shiro.filter;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;

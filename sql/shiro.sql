@@ -51,6 +51,11 @@ CREATE TABLE `sys_user_role` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- CREATE TABLE `sys_session` (
+--   `id` varchar(36) NOT NULL,
+--   `session` varchar(2000),
+--   constraint pk_sys_session PRIMARY KEY (`id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `sys_permission` */
 

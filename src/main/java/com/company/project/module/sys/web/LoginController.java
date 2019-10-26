@@ -1,29 +1,22 @@
 package com.company.project.module.sys.web;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.company.project.configurer.shiro.ProjectRealm;
-import org.apache.shiro.authc.ExcessiveAttemptsException;
+import com.company.project.core.controller.BaseController;
+import com.company.project.module.sys.service.SysUserService;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.company.project.core.Result;
-import com.company.project.core.ResultGenerator;
-import com.company.project.core.controller.BaseController;
-import com.company.project.core.model.ExceptionResult;
-import com.company.project.module.sys.model.SysUser;
-import com.company.project.module.sys.service.SysUserService;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class LoginController extends BaseController {
-
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private SysUserService sysUserService;
 	@Autowired
