@@ -1,8 +1,11 @@
 package com.company.project.module.mall.model;
 
+import lombok.ToString;
+
 import java.util.Date;
 import javax.persistence.*;
 
+@ToString
 @Table(name = "m_items")
 public class MallItems {
     @Id

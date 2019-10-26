@@ -88,6 +88,8 @@
                    location="classpath:/META-INF/resources/webjars/"/>
 
     <!-- 开启aop，对类代理 -->
+
+    <aop:aspectj-autoproxy/>
     <aop:config proxy-target-class="true"></aop:config>
     <!-- 开启shiro注解支持 -->
     <!-- 开启shiro注解支持 -->

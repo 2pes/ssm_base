@@ -1,6 +1,7 @@
 package com.company.project.module.sys.web;
 
 import com.company.project.configurer.shiro.ProjectRealm;
+import com.company.project.core.annotation.Log;
 import com.company.project.core.controller.BaseController;
 import com.company.project.module.sys.service.SysUserService;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -16,11 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class LoginController extends BaseController {
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	@Autowired
-	private SysUserService sysUserService;
-	@Autowired
-	private ProjectRealm projectRealm;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private SysUserService sysUserService;
+    @Autowired
+    private ProjectRealm projectRealm;
 
 /*
 	@PostMapping("loginto")
@@ -42,53 +43,53 @@ public class LoginController extends BaseController {
 
 	}*/
 
-	@RequestMapping("login")
-	public ModelAndView login(HttpServletRequest request) {
-		// 如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的权限定名
-		String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
-		ModelAndView view = new ModelAndView("login");
-		// 根据shiro返回的异常类路径判断，抛出指定异常信息
-		if (exceptionClassName != null) {
-			/*
-			 * Result result = new Result(); result.setType(Result.TYPE_RESULT_FAIL);
-			 */
-			if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
-				// 最终会抛给异常处理器
-				/*
-				 * result.setMessage("账号不存在"); throw new ExceptionResult(result);
-				 */
-				view.addObject("off_msg", "账号不存在");
-			} else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
-				/*
-				 * result.setMessage("用户名/密码错误"); throw new ExceptionResult(result);
-				 */
-				view.addObject("off_msg", "用户名/密码错误");
-			} else if ("randomCodeError".equals(exceptionClassName)) {
-				/*
-				 * result.setMessage("验证码错误 "); throw new ExceptionResult(result);
-				 */
-				view.addObject("off_msg", "验证码错误");
-			} else {
-				view.addObject("off_msg", "未知错误，请联系管理员！");
-				/*
-				 * throw new Exception();// 最终在异常处理器生成未知错误
-				 */
+    @RequestMapping("login")
+    public ModelAndView login(HttpServletRequest request) {
+        // 如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的权限定名
+        String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
+        ModelAndView view = new ModelAndView("login");
+        // 根据shiro返回的异常类路径判断，抛出指定异常信息
+        if (exceptionClassName != null) {
+            /*
+             * Result result = new Result(); result.setType(Result.TYPE_RESULT_FAIL);
+             */
+            if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
+                // 最终会抛给异常处理器
+                /*
+                 * result.setMessage("账号不存在"); throw new ExceptionResult(result);
+                 */
+                view.addObject("off_msg", "账号不存在");
+            } else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
+                /*
+                 * result.setMessage("用户名/密码错误"); throw new ExceptionResult(result);
+                 */
+                view.addObject("off_msg", "用户名/密码错误");
+            } else if ("randomCodeError".equals(exceptionClassName)) {
+                /*
+                 * result.setMessage("验证码错误 "); throw new ExceptionResult(result);
+                 */
+                view.addObject("off_msg", "验证码错误");
+            } else {
+                view.addObject("off_msg", "未知错误，请联系管理员！");
+                /*
+                 * throw new Exception();// 最终在异常处理器生成未知错误
+                 */
 
-			}
-		}
-		// 此方法不处理登陆成功（认证成功），shiro认证成功会自动跳转到上一个请求路径
-		// 登陆失败还到login页面
+            }
+        }
+        // 此方法不处理登陆成功（认证成功），shiro认证成功会自动跳转到上一个请求路径
+        // 登陆失败还到login页面
 
-		return view;
+        return view;
 
-	}
+    }
 
 
-	@RequestMapping("/clearShiroCache")
-	public String clearShiroCache(){
+    @RequestMapping("/clearShiroCache")
+    public String clearShiroCache() {
 
-		//清除缓存，将来正常开发要在service调用customRealm.clearCached()
-		projectRealm.clearCached();
-		return "success";
-	}
+        //清除缓存，将来正常开发要在service调用customRealm.clearCached()
+        projectRealm.clearCached();
+        return "success";
+    }
 }

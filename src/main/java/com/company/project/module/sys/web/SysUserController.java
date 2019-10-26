@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.company.project.core.annotation.Log;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,7 @@ public class SysUserController extends BaseController {
         return new ModelAndView("/module/sys/user/list");
     }
 
+    @Log("用户登录")
     @PostMapping("/list")
     @RequiresPermissions("user:query")
     @ApiOperation(value = "列表", notes = "用户列表")

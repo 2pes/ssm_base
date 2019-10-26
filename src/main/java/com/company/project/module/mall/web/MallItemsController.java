@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.company.project.core.annotation.Log;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,13 +58,14 @@ public class MallItemsController extends BaseController {
 		}
 	}
 
+	@Log("商品详细数据")
 	@PostMapping("/detail")
 	@ApiOperation(value = "明细", notes = "商品详细数据")
 	public Result detail(@RequestParam String id) {
 		MallItems mallItems = mallItemsService.findById(id);
 		return ResultGenerator.genSuccessResult(mallItems);
 	}
-
+	@Log("商品新增")
 	@PostMapping("/add")
 	@RequiresPermissions("item:create")
 	@ApiOperation(value = "新增", notes = "商品新增")
@@ -77,7 +79,7 @@ public class MallItemsController extends BaseController {
 			return ResultGenerator.genFailResult("新增商品信息失败，请联系网站管理员！");
 		}
 	}
-
+	@Log("商品删除")
 	@PostMapping("/delete")
 	@ApiOperation(value = "删除", notes = "商品删除")
 	public Result delete(@RequestParam String id) {
@@ -89,7 +91,7 @@ public class MallItemsController extends BaseController {
 			return ResultGenerator.genFailResult("删除商品信息失败，请联系网站管理员！");
 		}
 	}
-
+	@Log("商品修改")
 	@PostMapping("/update")
 	@RequiresPermissions("item:update")
 	@ApiOperation(value = "修改", notes = "商品修改")
