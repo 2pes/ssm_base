@@ -6,7 +6,6 @@ import com.company.project.core.util.IPUtils;
 import com.company.project.module.sys.model.ActiveUser;
 import com.company.project.module.sys.model.Syslog;
 import com.company.project.module.sys.service.SyslogService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

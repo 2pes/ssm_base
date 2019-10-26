@@ -52,9 +52,10 @@ public class CodeGenerator {
 		 * genCodeByCustomModelName("sys_role", "SysRoleMenu", "角色菜单");
 		 * genCodeByCustomModelName("sys_user", "SysUser", "用户");
 		 */
-    	
+
+        genCodeByCustomModelName("sys_log", "Syslog", "日志");
     	//genCodeByCustomModelName("m_user", "MallUser", "用户");
-    	genCodeByCustomModelName("m_items", "MallItems", "商品");
+    	//genCodeByCustomModelName("m_items", "MallItems", "商品");
     	//genCodeByCustomModelName("m_orders", "MallOrders", "用户订单");
     	//genCodeByCustomModelName("m_orderdetail", "MallOrdersDdetail", "订单明细");
     }
@@ -79,9 +80,9 @@ public class CodeGenerator {
      * @param modelName 自定义的 Model 名称
      */
     public static void genCodeByCustomModelName(String tableName, String modelName, String apiModelName) {
-        genModelAndMapper(tableName, modelName);
+        //genModelAndMapper(tableName, modelName);
         genService(tableName, modelName);
-        genController(tableName, modelName, apiModelName);
+        //genController(tableName, modelName, apiModelName);
     }
 
 
