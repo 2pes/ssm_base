@@ -2,18 +2,21 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context.xsd">
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
     <!-- 配置整合mybatis过程 -->
     <!-- 1.配置数据库相关参数properties的属性：${url} -->
     <context:property-placeholder
             location="classpath:jdbc.properties"/>
 
     <!-- 2.数据库连接池 -->
-    <bean id="dataSource"
-          class="com.alibaba.druid.pool.DruidDataSource">
+    <bean id="masterDataSource"
+          class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 配置连接池属性 -->
         <property name="driverClassName" value="${jdbc.driver}"/>
         <property name="url" value="${jdbc.url}"/>
@@ -53,11 +56,18 @@
         <property name="filters" value="${druid.filters}"/><!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
     </bean>
 
+    <bean name="slaveDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${jdbc.url2}"/>
+        <property name="username" value="${jdbc.username2}"/>
+        <property name="password" value="${jdbc.password2}"/>
+        <property name="driverClassName" value="${jdbc.driver2}"/>
+    </bean>
+
     <!-- 3.配置SqlSessionFactory对象 -->
     <bean id="sqlSessionFactory"
           class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 注入数据库连接池 -->
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="druidDynamicDataSource"></property>
         <!-- 配置MyBaties全局配置文件:mybatis-config.xml -->
         <property name="configLocation"
                   value="classpath:mybatis-config.xml"/>
@@ -84,5 +94,21 @@
         </property>
     </bean>
 
+    <bean id="druidDynamicDataSource" class="com.company.project.configurer.datasource.MultiDataSource">
+        <property name="defaultTargetDataSource" ref="masterDataSource"/>
+        <property name="targetDataSources">
+            <map><!-- 这里还可以加多个dataSource -->
+                <entry key="slave" value-ref="slaveDataSource"/>
+                <entry key="master" value-ref="masterDataSource"/>
+            </map>
+        </property>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="druidDynamicDataSource"></property>
+    </bean>
 
 </beans>

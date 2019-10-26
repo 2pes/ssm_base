@@ -31,7 +31,7 @@
     function itemcolumns(value, row, index) {
         var toolbtn =
             <shiro:hasPermission name="item:update">
-            '<a class="paoding-common-btn" data-type="edit" data-id="' + row.id + '" paoding-dlg-size="lm" paoding-dlg-width="600" paoding-dlg-height="250" data-content="user" plain="true" href="javascript:void(0);" style="color: #48a2ff">修改</a>'
+            '<a class="project-common-btn" data-type="edit" data-id="' + row.id + '" project-dlg-size="lm" project-dlg-width="600" project-dlg-height="250" data-content="user" plain="true" href="javascript:void(0);" style="color: #48a2ff">修改</a>'
             </shiro:hasPermission>
             <shiro:hasPermission name="item:delete">
             ' | <a  href="javascript:void(0);" data-id="' + row.id + '" data-content="user" style="color: #48a2ff" onclick="deleteId(\'' + row.id + '\')">删除</a>';

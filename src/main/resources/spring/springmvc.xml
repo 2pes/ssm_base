@@ -42,7 +42,7 @@
     </bean>
 
     <!-- 4.扫描web相关的bean -->
-    <context:component-scan base-package="com.company.project" >
+    <context:component-scan base-package="com.company.project">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
     </context:component-scan>
     <bean id="stringHttpMessageConverter"
@@ -88,11 +88,12 @@
 
     <!-- 开启aop，对类代理 -->
 
-    <aop:aspectj-autoproxy/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
     <aop:config proxy-target-class="true"></aop:config>
-    <!-- 开启shiro注解支持 -->
     <!-- 开启shiro注解支持 -->
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <property name="securityManager" ref="securityManager"/>
     </bean>
+
+
 </beans>

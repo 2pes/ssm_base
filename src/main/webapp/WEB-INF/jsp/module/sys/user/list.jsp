@@ -6,19 +6,19 @@
         <div class="easyui-panel" title="部门列表" data-options="fit:true">
             <div class="toolbar ">
                 <div class="ctrl-div ">
-                    <a href="#" class="easyui-linkbutton " data-type="add" paoding-dlg-width="600" paoding-dlg-height="400" data-content="dept"
+                    <a href="#" class="easyui-linkbutton " data-type="add" project-dlg-width="600" project-dlg-height="400" data-content="dept"
                        plain="true">新增</a>
                 </div>
             </div>
             <div>
-                <ul id="admin_sys_dept_tree" class="paoding-sys-tree">
+                <ul id="admin_sys_dept_tree" class="project-sys-tree">
                 </ul>
             </div>
         </div>
     </div>
-    <div class="paoding-tab-content-center" data-options="region:'center',border:false">
-        <div class="paoding-tab-content-north" data-options="region:'north'">
-            <div class="toolbar paoding-dg-toolbar" id="admin_user_tb">
+    <div class="project-tab-content-center" data-options="region:'center',border:false">
+        <div class="project-tab-content-north" data-options="region:'north'">
+            <div class="toolbar project-dg-toolbar" id="admin_user_tb">
                 <div class="search-div left">
                     <input class="easyui-searchbox" data-options="prompt:'关键字',searcher:common.search" id="admin_user_param"/>
                     <a href="javascript:keySearch();" class="easyui-linkbutton" style="margin-top: 3px" data-type="search"
@@ -26,8 +26,8 @@
                 </div>
                 <a href="javascript:batchDelete();" class="easyui-linkbutton " style="margin:5px 10px"
                    data-type="batchDel" data-content="user" plain="true">批量删除</a>
-                <a href="#" class="easyui-linkbutton " data-type="add" style="margin:5px 10px" paoding-dlg-width="600"
-                   paoding-dlg-height="400" data-content="user"
+                <a href="#" class="easyui-linkbutton " data-type="add" style="margin:5px 10px" project-dlg-width="600"
+                   project-dlg-height="400" data-content="user"
                    plain="true">新增</a>
             </div>
         </div>
@@ -37,7 +37,7 @@
     </div>
     <div id="admin_sys_dept_tree_mm" class="easyui-menu" style="width:120px;">
         <div onclick="append()" data-options="iconCls:'icon-add'">添加</div>
-        <div onclick="edit(this)" data-type="edit" paoding-dlg-size="sm" data-content="dept">编辑</div>
+        <div onclick="edit(this)" data-type="edit" project-dlg-size="sm" data-content="dept">编辑</div>
         <div onclick="removeit()" data-options="iconCls:'icon-remove'">移除</div>
         <div class="menu-sep"></div>
         <div onclick="rename()">重命名</div>
@@ -61,7 +61,7 @@
     function usercolumns(value, row, index) {
         var toolbtn =
             <shiro:hasPermission name="user:update">
-            '<a class="paoding-common-btn" data-type="edit" data-id="' + row.id + '" paoding-dlg-size="lm" paoding-dlg-width="600" paoding-dlg-height="250" data-content="user" plain="true" href="javascript:void(0);" style="color: #48a2ff">修改</a>'
+            '<a class="project-common-btn" data-type="edit" data-id="' + row.id + '" project-dlg-size="lm" project-dlg-width="600" project-dlg-height="250" data-content="user" plain="true" href="javascript:void(0);" style="color: #48a2ff">修改</a>'
             </shiro:hasPermission>
             ' | <a  href="javascript:void(0);" data-id="' + row.id + '" data-content="user" style="color: #48a2ff" onclick="deleteId(\''+row.id+'\')">删除</a>'+
             '<a></a>';

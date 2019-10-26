@@ -12,3 +12,22 @@ CREATE TABLE `sys_log`  (
   `location` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作地点',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+
+
+
+-- 多数据源
+
+--oracle Create table
+create table M_COST
+(
+  id    VARCHAR2(36) not null,
+  money VARCHAR2(36)
+)
+-- Create/Recreate primary, unique and foreign key constraints
+alter table M_COST
+  add constraint PK_COST primary key (ID)
+  using index
+  ;
+-----
+-- ！oracle Create table

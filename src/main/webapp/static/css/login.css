@@ -18,7 +18,7 @@ table {border-collapse:collapse;border-spacing:0;}
 /* vertical align top */nav.vertical ul li {display:block;}
 /* vertical menu */nav.horizontal ul li {display:inline-block;}
 /* horizontal menu */img {max-width:100%;}
-/*end reset*/html,body {font-family:Verdana;font-size:100%;'Raleway',sans-serif;/*background:url(../images/login/banner.jpg) no-repeat 0px 0px;*/background-size:cover;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;-ms-background-size:cover;background-attachment:fixed;}
+/*end reset*/html,body {font-family:Verdana;font-size:100%;'Raleway',sans-serif;background:url(../images/login/background.jpg) no-repeat 0px 0px;background-size:cover;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;-ms-background-size:cover;background-attachment:fixed;}
 h1,h2,h3,h4,h5,h6,a,p,input {'Raleway',sans-serif;margin:0;}
 ul,label {margin:0;padding:0;}
 body a:hover,body a {text-decoration:none;}

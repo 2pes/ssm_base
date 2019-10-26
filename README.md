@@ -161,3 +161,7 @@ pom.xml修改build节点
 https://www.sojson.com/shiro	
 https://www.cnblogs.com/learnhow/p/5694876.html		
 https://blog.csdn.net/puhaiyang/article/details/51753925	
+
+- 多数据源参考：   
+    https://blog.csdn.net/u013034378/article/details/81455513   
+    https://github.com/Albert-WuBinBin/DynamicDataSourceExample
