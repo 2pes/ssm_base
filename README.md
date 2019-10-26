@@ -165,3 +165,7 @@ https://blog.csdn.net/puhaiyang/article/details/51753925
 - 多数据源参考：   
     https://blog.csdn.net/u013034378/article/details/81455513   
     https://github.com/Albert-WuBinBin/DynamicDataSourceExample
+- quartz定时任务参考：    
+    https://blog.csdn.net/u010648555/article/details/54863144       
+    https://github.com/dufyun/quartz-core-learning
+
