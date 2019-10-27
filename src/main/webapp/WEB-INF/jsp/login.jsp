@@ -18,7 +18,7 @@
     <link href="${ctx }/static/css/login.css" rel="stylesheet" type="text/css" media="all"/>
 <body>
 <div class="main">
-    <h1>登录注册表单切换</h1>
+    <h1>后台管理系统</h1>
     <div class="w3_login">
         <div class="w3_login_module">
             <div class="module form-module">
@@ -31,12 +31,12 @@
                     <form action="#" method="post">
                         <input type="text" name="username" placeholder="用户名" required=" "/>
                         <input type="password" name="password" placeholder="密码" required=" "/>
-                        <div class="form-remember"> <input type="checkbox" name="rememberMe"/><span>记住我</span></div>
+                        <div class="form-remember"><input type="checkbox" name="rememberMe"/><span>记住我</span></div>
                         <div class="form-randomcode">
 
-                            <input type="text"  id="randomcode" name="randomcode" size="8"  placeholder="验证码" required=" "/> <img
-                                id="randomcode_img" src="${ctx }/validatecode" alt="点击刷新"
-                                  />
+                            <input type="text" id="randomcode" name="randomcode" size="8" placeholder="验证码" required=" "/>
+                            <a href="javascript:void(0);" onclick="javascript:randomcode_refresh()">
+                                <img id="randomcode_img" src="${ctx }/validatecode" alt="点击刷新"/></a>
                             <%--<a href=javascript:randomcode_refresh()>刷新</a>--%>
                         </div>
 
@@ -82,6 +82,10 @@
         })
     });
 
+    function randomcode_refresh() {
+        $("#randomcode_img").attr('src',
+            '${ctx }/validatecode?time' + new Date().getTime());
+    };
     var msg = "${off_msg}"
     if (msg != "") {
         alert("${off_msg}");

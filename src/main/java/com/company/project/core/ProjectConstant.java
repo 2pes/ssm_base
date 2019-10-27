@@ -7,7 +7,7 @@ public final class ProjectConstant {
     public static final String BASE_PACKAGE = "com.company.project";//生成代码所在的基础包名称，可根据自己公司的项目修改（注意：这个配置修改之后需要手工修改src目录项目默认的包路径，使其保持一致，不然会找不到类）
     public static final String MODULE = ".module";
     //   public static final String MODULE_PACKAGE = MODULE + ".*";
-    public static final String MODULE_PACKAGE = MODULE + ".mall";
+    public static final String MODULE_PACKAGE = MODULE + ".sys";
     public static final String MODEL_PACKAGE = BASE_PACKAGE + MODULE_PACKAGE + ".model";//生成的Model所在包
     public static final String MAPPER_PACKAGE = BASE_PACKAGE + MODULE_PACKAGE + ".dao";//生成的Mapper所在包
     public static final String MAPPER_PACKAGE_SYS = BASE_PACKAGE + MODULE + ".sys.dao";//从数据库Mapper所在包

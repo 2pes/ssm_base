@@ -1,3 +1,12 @@
+var editRow = '';//编辑的行对象
+
+/**
+ * ajax封装
+ * @param url
+ * @param params
+ * @param callback
+ * @returns {*}
+ */
 function ajaxPost(url, params, callback) {
     var result = null;
     var headers = {};
@@ -50,7 +59,6 @@ function ajaxPost(url, params, callback) {
     return result;
 }
 
-
 //日期格式化显示
 function timestampToTime(timestamp) {
     var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
@@ -66,15 +74,22 @@ function timestampToTime(timestamp) {
 //退出系统方法
 function logout() {
     _confirm('您确定要退出本系统吗?', null, function () {
-        location.href = '${ctx }/logout';
+        location.href = ctx +'/logout';
     })
 }
 
 //帮助
 function showhelp() {
-    window.open('${ctx }/help.html', '帮助文档');
+    window.open(ctx+'/help.html', '帮助文档');
 }
 
+/**
+ * 确认窗口
+ * @param question
+ * @param method_cancel
+ * @param method_ok
+ * @private
+ */
 var _confirm = function (question, method_cancel, method_ok) {
     $.messager.confirm('系统提示', question, function (r) {
         if (r) {
@@ -90,6 +105,9 @@ var _confirm = function (question, method_cancel, method_ok) {
 
 };
 
+/**
+ * 左侧菜单伸缩
+ */
 function toggle() {
     var opts = $('#sm').sidemenu('options');
     $('#sm').sidemenu(opts.collapsed ? 'expand' : 'collapse');
@@ -99,18 +117,25 @@ function toggle() {
     })
 }
 
-function openDialog(url, size, id,res,fn) {
+/**
+ * 打开编辑窗口
+ * @param url
+ * @param size
+ * @param id
+ * @param res
+ * @param fn
+ */
+function openDialog(url, size, id, res, fn,status) {
     var split = ['800', '400'];
-    debugger;
-    var row =  '' ;
+    editRow = {objId: res,status:status};//obj为编辑项id,status编辑状态，为add
+    var row = '';
     try {
         fn = eval(fn);
-    } catch(e) {
-        console.log(e);
-        alert(fn+'方法不存在！');
+    } catch (e) {
+        console.log(fn + '方法不存在！');
     }
-    if (typeof fn === 'function'){
-        row =  fn.call(res);
+    if (typeof fn === 'function') {
+        row = fn.call(res);
     }
     if (size) {
         split = size.split('_');
@@ -122,7 +147,7 @@ function openDialog(url, size, id,res,fn) {
         closed: false,
         cache: false,
         href: ctx + url,
-        modal: true
+        modal: true//, buttons: eval(id+'DialogButtons').call(this)
     });
 };
 
@@ -146,4 +171,12 @@ function message_alert(data) {
     } else if (type == 3) {
         $.messager.alert('提示信息', message, 'info');
     }
+};
+
+/**
+ * 清除form表单
+ * @param id
+ */
+function clearForm(id) {
+    $('#ff_' + id).form('clear');
 };

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<form id="userform" action="${ctx }/book/1003/appoint" method="post">
+<form id="userform" data-options="border:false" action="${ctx }/book/1003/appoint" method="post">
 	<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%"
 		bgColor=#c4d8ed>
 

@@ -28,6 +28,7 @@
             params: {}
         },
         fit:true,
+        scrollbarSize :0,
         loadFilter: function (data) {
             if (data.code === 200 && data.data) {
                 return data.data;

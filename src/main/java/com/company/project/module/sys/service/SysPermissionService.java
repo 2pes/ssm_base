@@ -6,6 +6,7 @@ import com.company.project.module.sys.model.SysPermission;
 import com.company.project.core.Service;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -23,6 +24,7 @@ public interface SysPermissionService extends Service<SysPermission> {
     /**
      * 树形菜单表格
      * @return
+     * @param params
      */
-    List<EasyUITreeGridNode> getTreeGridList();
+    List<EasyUITreeGridNode> getTreeGridList(Map params);
 }

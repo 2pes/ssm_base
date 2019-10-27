@@ -1,9 +1,13 @@
 package com.company.project.module.sys.model;
 
-import javax.persistence.*;
+import lombok.ToString;
 
+import javax.persistence.*;
+import java.io.Serializable;
+
+@ToString
 @Table(name = "sys_role")
-public class SysRoleMenu {
+public class SysRole implements Serializable {
     @Id
     private String id;
 

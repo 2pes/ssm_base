@@ -2,6 +2,8 @@ package com.company.project.core.util;
 
 import com.company.project.core.model.EasyUITreeNode;
 import com.company.project.core.model.Tree;
+import com.google.common.collect.Lists;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,6 +75,7 @@ public class TreeUtils {
         });
         return topNodes;
     }
+
     public static <T> List<EasyUITreeNode<T>> buildEasyUITreeNodeList(List<EasyUITreeNode<T>> nodes, String idParam) {
         if (nodes == null) {
             return new ArrayList<>();
@@ -87,7 +90,14 @@ public class TreeUtils {
             nodes.forEach(parent -> {
                 String id = parent.getId();
                 if (id != null && id.equals(pid)) {
-                    parent.getChildren().add(children);
+                    List<EasyUITreeNode> childrens = parent.getChildren();
+                    if (!CollectionUtils.isEmpty(childrens)) {
+                        childrens.add(children);
+                    } else {
+                        childrens = Lists.newArrayList();
+                        childrens.add(children);
+                        parent.setChildren(childrens);
+                    }
                 }
             });
         });

@@ -51,6 +51,7 @@
             }
         },
         fit: true,
+        scrollbarSize :0,
         columns: [[
             {field: 'id', title: 'id', width: 100},
             {field: 'name', title: '商品名称', width: 100},

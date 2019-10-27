@@ -93,7 +93,8 @@
         singleSelect: true,
         pagination: true,
         toolbar: '#tb',
-        footer: '#ft'
+        footer: '#ft',
+        scrollbarSize :0,
     });
 
 </script>

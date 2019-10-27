@@ -1,9 +1,12 @@
 package com.company.project.module.sys.model;
 
-import javax.persistence.*;
+import lombok.ToString;
 
+import javax.persistence.*;
+import java.io.Serializable;
+@ToString
 @Table(name = "sys_permission")
-public class SysPermission {
+public class SysPermission implements Serializable {
     /**
      * 主键
      */

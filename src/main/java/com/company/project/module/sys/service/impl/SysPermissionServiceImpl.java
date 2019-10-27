@@ -15,12 +15,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Condition;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -35,7 +38,15 @@ public class SysPermissionServiceImpl extends AbstractService<SysPermission> imp
 
     @Override
     public List<EasyUITreeNode<EasyUITreeNode>> getMenusByUser(ActiveUser currentUser) {
-        List<SysPermission> menus = currentUser.getMenus();
+        List<SysPermission> menus = Lists.newArrayList();
+        //todo 后期改成根据角色判断
+        if ("zhangsan".equals(currentUser.getUserid())) {
+            Example example = new Example(SysPermission.class);
+            Example.Criteria criteria = example.createCriteria().andNotEqualTo("parentid", (long) 0);
+            menus = sysPermissionMapper.selectByExample(example);
+        }else {
+            menus = currentUser.getMenus();
+        }
         ArrayList<EasyUITreeNode<EasyUITreeNode>> menusList = Lists.newArrayList();
         menus.forEach(permission -> {
             EasyUITreeNode node = EasyUITreeNode.builder()
@@ -58,14 +69,26 @@ public class SysPermissionServiceImpl extends AbstractService<SysPermission> imp
     }
 
     @Override
-    public List<EasyUITreeGridNode> getTreeGridList() {
+    public List<EasyUITreeGridNode> getTreeGridList(Map params) {
         List<EasyUITreeGridNode> list = new ArrayList<>();
-        Condition condition = new Condition(SysPermission.class);
-        condition.createCriteria().andNotEqualTo("parentid", 0);
-        // condition.setOrderByClause("seq asc");
-        List<SysPermission> allPermissions = sysPermissionMapper.selectByCondition(condition);
+        Example example = new Example(SysPermission.class);
+        Example.Criteria criteria = example.createCriteria().andNotEqualTo("parentid", (long) 0);
+
+        if (!CollectionUtils.isEmpty(params)) {
+            String name = String.valueOf(params.get("name")).trim();
+            if (!StringUtils.isEmpty(name)) {
+                criteria.andLike("name", "%" + name + "%");
+            }
+            if (!StringUtils.isEmpty(params.get("available"))) {
+                criteria.andEqualTo("available", Long.parseLong(String.valueOf(params.get("available"))));
+            }
+            if (!StringUtils.isEmpty(params.get("type"))) {
+                criteria.andEqualTo("type", String.valueOf(params.get("type")));
+            }
+        }
+        List<SysPermission> allPermissions = sysPermissionMapper.selectByExample(example);
         for (SysPermission permission : allPermissions) {
-            if (permission.getParentid().toString().equals("0")) {
+            if (permission.getParentid().toString().equals("1")) {
                 EasyUITreeGridNode treeGridNode = setEasyUITreeGridNode(permission);
                 treeGridNode.set_parentId(null);
                 list.add(treeGridNode);
@@ -88,9 +111,10 @@ public class SysPermissionServiceImpl extends AbstractService<SysPermission> imp
                 .name(permission.getName())
                 ._parentId(permission.getParentid().toString())
                 //.icon(permission.getIcon())
-                .type(permission.getType() == "permission" ? 1 : 0)
-                //.status(permission.())
+                .type(permission.getType().equals("permission") ? 1 : 0)
+                .status(Integer.parseInt(permission.getAvailable()))
                 .build();
+
         return treeGridNode;
     }
 }
