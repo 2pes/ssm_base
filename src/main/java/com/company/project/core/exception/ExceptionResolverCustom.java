@@ -80,7 +80,7 @@ public class ExceptionResolverCustom implements HandlerExceptionResolver {
         if (ex instanceof UnauthorizedException) {
             //无权限异常
             //todo 改为json输出
-            logger.info(ShiroManagerUtils.getUserNickName() + ",无权访问该资源:" + ex.getMessage());
+            logger.info(ShiroManagerUtils.getUsercode() + ",无权访问[" + request.getServletPath() + "],因为" + ex.getMessage());
             ModelAndView mv = new ModelAndView("refuse");
             return mv;
         }

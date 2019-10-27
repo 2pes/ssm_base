@@ -7,6 +7,7 @@
     <title>index</title>
 
     <%@ include file="/WEB-INF/jsp/commons/head.jsp" %>
+    <script type="text/javascript" src="${ctx }/static/js/index.js"></script>
 <body class="easyui-layout">
 <%@ include file="/WEB-INF/jsp/commons/loadingDiv.jsp" %>
 <div data-options="region:'north',split:false" style="height: 80px;">
@@ -129,7 +130,8 @@
         }, {
             text: '任务管理',
             children: [{
-                text: '任务列表'
+                text: '任务列表',
+                url: '/module/sys/job'
             }, {
                 text: '任务日志'
             }]
@@ -138,7 +140,8 @@
         text: '参数管理',
         iconCls: 'icon-more',
         children: [{
-            text: 'Option4'
+            text: '数据监控',
+            url: '/druid/index'
         }, {
             text: 'Option5'
         }, {

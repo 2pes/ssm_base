@@ -41,7 +41,7 @@ public class SysUserController extends BaseController {
         return new ModelAndView("/module/sys/user/list");
     }
 
-    @Log("用户登录")
+    @Log("用户列表")
     @PostMapping("/list")
     @RequiresPermissions("user:query")
     @ApiOperation(value = "列表", notes = "用户列表")

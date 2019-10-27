@@ -7,6 +7,7 @@ import org.apache.shiro.subject.Subject;
 
 /**
  * shiro 认证信息操作工具类
+ *
  * @author Chen
  * @created 2019-10-26-10:43.
  */
@@ -51,6 +52,11 @@ public class ShiroManagerUtils {
     public static String getUserNickName() {
         return getActiveUser() == null ? null : getActiveUser().getUsername();
     }
+
+    public static String getUsercode() {
+        return getActiveUser() == null ? null : getActiveUser().getUsercode();
+    }
+
     /**
      * 把值放入到当前登录用户的Session里
      *

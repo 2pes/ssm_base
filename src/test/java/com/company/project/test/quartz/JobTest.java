@@ -1,11 +1,12 @@
 package com.company.project.test.quartz;
 
-import com.company.project.configurer.quartz.HelloWorldJob;
+import com.company.project.configurer.quartz.TaskOneJob;
 import com.company.project.test.BaseTest;
 import org.junit.Test;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StopWatch;
 
 /**
  * 参考https://blog.csdn.net/u010648555/article/details/54863144
@@ -21,7 +22,7 @@ public class JobTest extends BaseTest {
     public void startSchedule() {
         try {
             // 1、创建一个JobDetail实例，指定Quartz
-            JobDetail jobDetail = JobBuilder.newJob(HelloWorldJob.class)
+            JobDetail jobDetail = JobBuilder.newJob(TaskOneJob.class)
                     // 任务执行类
                     .withIdentity("job1_1", "jGroup1")
                     // 任务名，任务组
@@ -44,8 +45,14 @@ public class JobTest extends BaseTest {
             scheduler.start();
             // 4、调度执行
             scheduler.scheduleJob(jobDetail, trigger);
-
+            StopWatch stopWatch = new StopWatch();
+            stopWatch.start();
+            Thread.sleep(10000);
+            stopWatch.stop();
+            System.out.println(stopWatch.prettyPrint());
         } catch (SchedulerException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
