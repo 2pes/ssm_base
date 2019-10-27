@@ -27,6 +27,7 @@
             pageNum: 10,
             params: {}
         },
+        fit:true,
         loadFilter: function (data) {
             if (data.code === 200 && data.data) {
                 return data.data;

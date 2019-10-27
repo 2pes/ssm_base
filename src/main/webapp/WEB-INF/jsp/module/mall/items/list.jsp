@@ -15,15 +15,11 @@
 </div>
 <div id="ft_item" style="padding: 2px 5px;">
     <a href="javascript:void(0)" class="easyui-linkbutton"
-       iconCls="icon-add" plain="true"></a> <a href="javascript:void(0)"
-                                               class="easyui-linkbutton" iconCls="icon-edit" plain="true"
-                                               onclick="toggledialog()"></a> <a href="javascript:void(0)"
-                                                                                class="easyui-linkbutton" iconCls="icon-save" plain="true"
-                                                                                onclick="toggledialog()"></a> <a href="javascript:void(0)"
-                                                                                                                 class="easyui-linkbutton" iconCls="icon-cut"
-                                                                                                                 plain="true"></a> <a
-        href="javascript:void(0)" class="easyui-linkbutton"
-        iconCls="icon-remove" plain="true"></a>
+       iconCls="icon-add" plain="true"></a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="openDialog ()"></a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="openDialog ()"></a>
+    <a href="javascript:void(0)" lass="easyui-linkbutton" iconCls="icon-cut" plain="true"></a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"></a>
 </div>
 <script type="text/javascript">
     $.parser.parse();
@@ -32,10 +28,10 @@
         var toolbtn =
             <shiro:hasPermission name="item:update">
             '<a class="project-common-btn" data-type="edit" data-id="' + row.id + '" project-dlg-size="lm" project-dlg-width="600" project-dlg-height="250" data-content="user" plain="true" href="javascript:void(0);" style="color: #48a2ff">修改</a>'
-            </shiro:hasPermission>
-            <shiro:hasPermission name="item:delete">
-            ' | <a  href="javascript:void(0);" data-id="' + row.id + '" data-content="user" style="color: #48a2ff" onclick="deleteId(\'' + row.id + '\')">删除</a>';
-            </shiro:hasPermission>
+        </shiro:hasPermission>
+        <shiro:hasPermission name="item:delete">
+        ' | <a  href="javascript:void(0);" data-id="' + row.id + '" data-content="user" style="color: #48a2ff" onclick="deleteId(\'' + row.id + '\')">删除</a>';
+        </shiro:hasPermission>
         return toolbtn;
     }
 
@@ -54,6 +50,7 @@
                 return data;
             }
         },
+        fit: true,
         columns: [[
             {field: 'id', title: 'id', width: 100},
             {field: 'name', title: '商品名称', width: 100},

@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.company.project.core.model.EasyUIDataGridResult;
+import com.company.project.core.model.EasyUITreeGridNode;
 import com.company.project.core.model.EasyUITreeNode;
 import com.company.project.module.sys.model.ActiveUser;
 import org.slf4j.Logger;
@@ -35,9 +37,14 @@ public class SysPermissionController extends BaseController {
     private SysPermissionService sysPermissionService;
 
     @GetMapping()
-    @ApiOperation(value = "请求地址", notes = "菜单权限列表地址")
-    public ModelAndView list() {
+    @ApiOperation(value = "请求地址", notes = "菜单权限列表页面地址")
+    public ModelAndView listPage() {
         return new ModelAndView("/module/sys/permission/list");
+    }
+    @GetMapping("/edit")
+    @ApiOperation(value = "请求地址", notes = "菜单修改页面地址")
+    public ModelAndView editPage() {
+        return new ModelAndView("/module/sys/permission/edit");
     }
 
     @PostMapping("/list")
@@ -104,4 +111,16 @@ public class SysPermissionController extends BaseController {
         return ResultGenerator.genSuccessResult(result);
     }
 
+    @PostMapping("/treeGrid")
+    @ApiOperation(value = "列表", notes = "权限列表")
+    public Result getTreeGridList() {
+        try {
+            List<EasyUITreeGridNode> list = sysPermissionService.getTreeGridList();
+            EasyUIDataGridResult easyUIDataGridResult = EasyUIDataGridResult.builder().rows(list).total(list.size()).build();
+            return ResultGenerator.genSuccessResult(easyUIDataGridResult);
+        } catch (Exception e) {
+            logger.error("获取权限列表失败", e);
+            return ResultGenerator.genFailResult("获取权限列表失败！");
+        }
+    }
 }

@@ -4,8 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>index</title>
-
+    <title>后台管理首页</title>
     <%@ include file="/WEB-INF/jsp/commons/head.jsp" %>
     <script type="text/javascript" src="${ctx }/static/js/index.js"></script>
 <body class="easyui-layout">
@@ -83,9 +82,9 @@
         <a href="javascript:void(0)" class="easyui-linkbutton"
            iconCls="icon-add" plain="true"></a> <a href="javascript:void(0)"
                                                    class="easyui-linkbutton" iconCls="icon-edit" plain="true"
-                                                   onclick="toggledialog()"></a> <a href="javascript:void(0)"
+                                                   onclick="openDialog ('/sys/dialog','800_400')"></a> <a href="javascript:void(0)"
                                                                                     class="easyui-linkbutton" iconCls="icon-save" plain="true"
-                                                                                    onclick="toggledialog()"></a> <a href="javascript:void(0)"
+                                                                                    onclick="openDialog ()"></a> <a href="javascript:void(0)"
                                                                                                                      class="easyui-linkbutton" iconCls="icon-cut"
                                                                                                                      plain="true"></a> <a
             href="javascript:void(0)" class="easyui-linkbutton"
@@ -141,7 +140,7 @@
         iconCls: 'icon-more',
         children: [{
             text: '数据监控',
-            url: '/druid/index'
+            url: '/toDruid'
         }, {
             text: 'Option5'
         }, {
@@ -149,14 +148,6 @@
         }]
     }];
 
-    function toggle() {
-        var opts = $('#sm').sidemenu('options');
-        $('#sm').sidemenu(opts.collapsed ? 'expand' : 'collapse');
-        opts = $('#sm').sidemenu('options');
-        $('#sm').sidemenu('resize', {
-            width: opts.collapsed ? 60 : 200
-        })
-    }
 
     function selectHandler(e, t, i) {
         $('#contentDiv').empty();
@@ -168,43 +159,8 @@
             });
     }
 
-    function toggledialog() {
-        $('#dd').dialog({
-            title: 'My Dialog',
-            width: 800,
-            height: 400,
-            closed: false,
-            cache: false,
-            href: ctx + '/sys/dialog',
-            modal: true
-        });
-    };
-
-    //统一封装方法，作用：提示信息
-    function message_alert(data) {
-        //从返回的json数据中获取结果信息
-        var data_v = data.result ? data.result : data;
-
-        //提交结果类型
-        var type = data_v.type;
-        //结果提示信息
-        var message = data_v.message;
-        //alert(message);
-        if (type == 0) {
-            //如果type等于0表示失败，调用 jquery easyui的信息提示组件
-            $.messager.alert('提示信息', message, 'error');
-        } else if (type == 1) {
-            $.messager.alert('提示信息', message, 'success');
-        } else if (type == 2) {
-            $.messager.alert('提示信息', message, 'warning');
-        } else if (type == 3) {
-            $.messager.alert('提示信息', message, 'info');
-        }
-    };
 
     $(function () {
-
-
         $('#dg_' + 'index').datagrid({
             url: ctx + '/static/js/mock/datagrid_data.json',
             columns: [[{
@@ -329,32 +285,7 @@
         /* formObj.ajaxSubmit(options); */
     };
 
-    //退出系统方法
-    function logout() {
-        _confirm('您确定要退出本系统吗?', null, function () {
-            location.href = '${ctx }/logout';
-        })
-    }
 
-    //帮助
-    function showhelp() {
-        window.open('${ctx }/help.html', '帮助文档');
-    }
-
-    var _confirm = function (question, method_cancel, method_ok) {
-        $.messager.confirm('系统提示', question, function (r) {
-            if (r) {
-                if (method_ok) {
-                    method_ok();
-                }
-            } else {
-                if (method_cancel) {
-                    method_cancel();
-                }
-            }
-        });
-
-    };
 
     function addItem() {
         $.ajax({

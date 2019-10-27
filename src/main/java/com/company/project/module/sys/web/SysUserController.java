@@ -37,7 +37,7 @@ public class SysUserController extends BaseController {
     @GetMapping()
     @ApiOperation(value = "请求地址", notes = "用户列表地址")
     @RequiresPermissions("user:query")
-    public ModelAndView list() {
+    public ModelAndView listPage() {
         return new ModelAndView("/module/sys/user/list");
     }
 

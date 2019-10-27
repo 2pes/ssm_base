@@ -22,12 +22,11 @@
 1. 以maven项目导入eclipse或idea。
 2. 右键项目，`debug as` --> `debug on server`。
 3. 访问地址：		
-	- http://localhost:8080/ssm/	
-	- http://localhost:8080/ssm/book/list	
-	- http://localhost:8080/ssm/book/1000/detail	
+	- http://localhost:8080/ssm_perm/	
+	- 账号密码：zhangsan/111111
 	
 ## 3. 分支permrm_system
-permrm_system分支使用easyui作为前端，实现基本权限管理功能。	
+permrm_system分支使用easyui作为前端，实现后台基本权限管理功能。	
 地址：[https://github.com/maxmarvel/ssm_base/tree/perm_system](https://github.com/maxmarvel/ssm_base/tree/perm_system)	
 
 ## 4. 测试
@@ -149,19 +148,21 @@ pom.xml修改build节点
 	- [x] 通用mapper 
 	- [x] 代码生成器 
 	- [x] swagger: [v2.0](https://github.com/maxmarvel/ssm_base/archive/v2.0.zip)
-	- [ ] shiro 
-	- [ ] quartz  
+	- [x] shiro 
+	- [x] quartz  
 2. 整合功能
-	- [ ] jquery，easyui框架后台界面
+	- [ ] jquery，easyui框架后台界面，及常用组件（layout、dialog、datagrid、tree）
 	- [ ] 用户管理
 	- [ ] 角色管理
 	- [ ] 权限管理
 	- [ ] 日志管理
+	- [ ] 任务管理
+	- [ ] 数据监控
 ## 参考
-https://www.sojson.com/shiro	
-https://www.cnblogs.com/learnhow/p/5694876.html		
-https://blog.csdn.net/puhaiyang/article/details/51753925	
-
+- shiro:    
+    https://www.sojson.com/shiro	
+    https://www.cnblogs.com/learnhow/p/5694876.html		
+    https://blog.csdn.net/puhaiyang/article/details/51753925	
 - 多数据源参考：   
     https://blog.csdn.net/u013034378/article/details/81455513   
     https://github.com/Albert-WuBinBin/DynamicDataSourceExample

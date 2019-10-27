@@ -39,5 +39,13 @@ public class IndexController extends BaseController {
     private String validatecode() {
         return "validatecode";
     }
+    @RequestMapping(value = "/sys/dialog", method = RequestMethod.GET)
+    private String dialog(Model model) {
 
+        return "module/sys/dialog";
+    }
+    @RequestMapping(value = "/toDruid", method = RequestMethod.GET)
+    private String druidPage() {
+        return "module/config/druid";
+    }
 }

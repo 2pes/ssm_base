@@ -34,7 +34,7 @@ public class SysRoleMenuController extends BaseController {
 
     @GetMapping()
     @ApiOperation(value = "请求地址", notes = "角色列表地址")
-    public ModelAndView list() {
+    public ModelAndView listPage() {
         return new ModelAndView("/module/sys/role/list");
     }
 
