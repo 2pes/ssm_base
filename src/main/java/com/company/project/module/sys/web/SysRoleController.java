@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by company.chen on 2019/10/27.
  */
 @RestController
-@RequestMapping("/module/sys/role")
+@RequestMapping("/sys/role")
 @Api(description = "角色管理")
 public class SysRoleController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());

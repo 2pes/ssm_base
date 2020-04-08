@@ -21,7 +21,7 @@
     }
     $('#dg_' + 'job').datagrid({
         method: 'post',
-        url: ctx + '/module/sys/job/list',
+        url: ctx + '/sys/job/list',
         queryParams: {
             pageSize: 1,
             pageNum: 10,
@@ -97,16 +97,16 @@
 </div>
 <script type="text/javascript">
     function add(){
-        window.location.href = ctx + "/module/sys/job/toAdd";
+        window.location.href = ctx + "/sys/job/toAdd";
     }
 
     function edit(jobName,jobGroup){
-        window.location.href = ctx + "/module/sys/job/toEdit?jobName="+jobName+"&jobGroup="+jobGroup;
+        window.location.href = ctx + "/sys/job/toEdit?jobName="+jobName+"&jobGroup="+jobGroup;
     }
 
     //暂停任务
     function pauseJob(jobName,jobGroupName){
-        $.post(ctx + "/module/sys/job/pauseJob",{"jobName":jobName,"jobGroupName":jobGroupName},function(data){
+        $.post(ctx + "/sys/job/pauseJob",{"jobName":jobName,"jobGroupName":jobGroupName},function(data){
             if(data.status = 'success'){
                 window.location.href = window.location.href;
             }else{
@@ -117,7 +117,7 @@
 
     //恢复任务
     function resumeJob(jobName,jobGroupName){
-        $.post(ctx + "/module/sys/job/resumeJob",{"jobName":jobName,"jobGroupName":jobGroupName},function(data){
+        $.post(ctx + "/sys/job/resumeJob",{"jobName":jobName,"jobGroupName":jobGroupName},function(data){
             if(data.status = 'success'){
                 window.location.href = window.location.href;
             }else{
@@ -127,7 +127,7 @@
     }
     //删除
     function deleteJob(jobName,jobGroupName,triggerName,triggerGroupName){
-        $.post(ctx + "/module/sys/job/deleteJob",{"jobName":jobName,"jobGroupName":jobGroupName,"triggerName":triggerName,"triggerGroupName":triggerGroupName},
+        $.post(ctx + "/sys/job/deleteJob",{"jobName":jobName,"jobGroupName":jobGroupName,"triggerName":triggerName,"triggerGroupName":triggerGroupName},
             function(data){
                 if(data.status = 'success'){
                     window.location.href = window.location.href;

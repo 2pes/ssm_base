@@ -2,7 +2,7 @@ package com.company.project.test.datasource;
 
 import com.company.project.configurer.datasource.MultiDataSource;
 import com.company.project.module.book.model.Book;
-import com.company.project.module.book.service.BookService;
+import com.company.project.module.book.service.LibraryBookService;
 import com.company.project.module.mall.model.MallCost;
 import com.company.project.module.mall.service.MallCostService;
 import com.company.project.test.BaseTest;
@@ -18,7 +18,7 @@ import java.util.List;
 public class DatasourceTest extends BaseTest {
 
     @Autowired
-    private BookService bookService;
+    private LibraryBookService bookService;
     @Autowired
     private MallCostService mallCostService;
 

@@ -1,6 +1,6 @@
 package com.company.project.module.sys.service;
 
-public interface JobService {
+public interface SysJobService {
     /**
      * addJob(方法描述：添加一个定时任务) <br />
      * (方法适用条件描述： – 可选)

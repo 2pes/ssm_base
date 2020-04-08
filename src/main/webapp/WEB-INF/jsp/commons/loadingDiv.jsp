@@ -3,7 +3,7 @@
 <div id='loadingDiv' style="position: absolute; z-index: 1000; top: 0px; left: 0px;
 width: 100%; height: 100%; background: white; text-align: center;font-size: 400px;">
     <h1 style="top: 48%; position: relative;">
-        <font color="#15428B">加载中,请稍后···</font>
+        <font color="#15428B">加载中,请稍后不起作用···</font>
     </h1>
 </div>
 <script type="text/JavaScript">

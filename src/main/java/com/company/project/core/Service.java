@@ -34,6 +34,7 @@ public interface Service<T> {
     int updateNotNull(T entity);
     List<T> findByExample(Object example);
 
-    //void batchSave(List<T> list);
+    void batchInsertData(List<T> list);
+    void batchInsertByMethod(List<T> list,String methodKey);
 
 }

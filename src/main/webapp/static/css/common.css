@@ -1,0 +1,19 @@
+@charset "utf-8";body {padding: 0;margin: 0;}
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+a {text-decoration: none;}
+ul, ol {list-style-type: none;}
+li {list-style: none;}
+img {display: block;border: 0px;}
+.left {float: left;}
+.right {float: right;}
+/*滚动条*/
+*::-webkit-scrollbar {width: 8px;height: 8px;}
+*::-webkit-scrollbar-track {background: #f6f6f6;border-radius: 2px;}
+*::-webkit-scrollbar-thumb {background: #aaa;border-radius: 2px;}
+*::-webkit-scrollbar-thumb:hover {background: #747474;}
+*::-webkit-scrollbar-corner {background: #f6f6f6;}
+

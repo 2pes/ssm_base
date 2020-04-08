@@ -26,7 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by company.chen on 2019/10/20.
  */
 @RestController
-@RequestMapping("/module/sys/user")
+@RequestMapping("/sys/user")
 @Api(description = "用户管理")
 public class SysUserController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());

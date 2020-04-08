@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jsp/commons/taglib.jsp" %>
 <div class="easyui-layout" data-options="fit:true">
-    <div data-options="region:'north',border:false,title:'菜单管理',collapsible:false" style="height:65px;margin-bottom: 5px;">
+    <div data-options="region:'north',border:false,title:'角色管理',collapsible:false" style="height:65px;margin-bottom: 5px;">
         <div id="tb_role" style="padding: 2px 5px;">
             <form id="ff_role_search">
                 名称: <input type="text" name="name" class="easyui-textbox">
@@ -59,18 +59,18 @@
         });
         $('.project-add-btn').bind('click', function () {
             editRow = '';
-            openDialog('/module/sys/role/edit', '400_300', null, -1, null, 'add');
+            openDialog('/sys/role/edit', '400_300', null, -1, null, 'add');
         });
         var rolecolumns = function (value, row, index) {
-            var toolbtn = '<a plain="true" href="javascript:void(0);" style="color: #48a2ff" onclick="openDialog(\'/module/sys/role/edit\',\'400_300\',\'role\',\'' + row.id + '\',getEdit,\'edit\')">修改</a>' +
-                ' | <a plain="true"  href="javascript:void(0);" style="color: #48a2ff" onclick="openDialog(\'/module/sys/role/editPerm\',\'500_500\',\'role\',\'' + row.id + '\',getEdit,\'edit\')">权限分配</a>'
+            var toolbtn = '<a plain="true" href="javascript:void(0);" style="color: #48a2ff" onclick="openDialog(\'/sys/role/edit\',\'400_300\',\'role\',\'' + row.id + '\',getEdit,\'edit\')">修改</a>' +
+                ' | <a plain="true"  href="javascript:void(0);" style="color: #48a2ff" onclick="openDialog(\'/sys/role/editPerm\',\'500_500\',\'role\',\'' + row.id + '\',getEdit,\'edit\')">权限分配</a>'
                 ' | <a plain="true"  href="javascript:void(0);" style="color: #48a2ff" onclick="_confirm(\'确认删除【' + row.name + '\】\',null,detletRow)">删除</a>'
             return toolbtn;
         };
 
 
         $('#tt_' + 'role').datagrid({
-            url: ctx + '/module/sys/role/list',
+            url: ctx + '/sys/role/list',
             method: 'post',
             fitColumns: true,
             fit: true,

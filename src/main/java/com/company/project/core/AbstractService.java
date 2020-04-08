@@ -2,10 +2,13 @@ package com.company.project.core;
 
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +23,7 @@ import tk.mybatis.mapper.entity.Example;
  */
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public abstract class AbstractService<T> implements Service<T> {
-
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     protected Mapper<T> mapper;
@@ -128,29 +131,67 @@ public abstract class AbstractService<T> implements Service<T> {
     }
 
 
-   /* @Override
-    @Transactional
-    public void batchSave(List<T> list) {
-        int size = list.size();
-        int unitNum = 199;
-        int startIndex = 0;
-        int endIndex = 0;
-        while (size > 0) {
-            if (size > unitNum) {
-                endIndex = startIndex + unitNum;
-                // logger.info(" start insert :" + startIndex + " to " + endIndex);
-            } else {
-                endIndex = startIndex + size;
-                // logger.info(" start insert :" + startIndex + " to " + endIndex);
-                // logger.info("insertBatch success : " + list.size() + " data inserted ;");
+    @Override
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    public void batchInsertData(List<T> list) {
+        try {
+            int size = list.size();
+            int unitNum = 199;
+            int startIndex = 0;
+            int endIndex = 0;
+            while (size > 0) {
+                if (size > unitNum) {
+                    endIndex = startIndex + unitNum;
+                    mapper.insertList(list.subList(startIndex, endIndex));
+                    logger.info(" start insert :" + startIndex + " to " + endIndex);
+                } else {
+                    endIndex = startIndex + size;
+                    mapper.insertList(list.subList(startIndex, endIndex));
+                    logger.info(" start insert :" + startIndex + " to " + endIndex);
+                    logger.info("insertBatch success : " + list.size() + " data inserted ;");
+                }
+                List<T> insertData = list.subList(startIndex, endIndex);
+                save(insertData);
+                size = size - unitNum;
+                startIndex = endIndex;
             }
-            List<T> insertData = list.subList(startIndex, endIndex);
-            save(insertData);
-            size = size - unitNum;
-            startIndex = endIndex;
+        } catch (Exception e) {
+            e.printStackTrace();
+            //throw new ServiceException("插入数据失败！", e);
         }
+
     }
-*/
+
+    @Override
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    public void batchInsertByMethod(List<T> list, String methodKey) {
+        try {
+            Method method = this.mapper.getClass().getDeclaredMethod("batchSave" + methodKey, List.class);
+            int batchCount = 199;
+            int batchLastIndex = batchCount - 1;
+            for (int index = 0; index < list.size() - 1; ) {
+                if (batchLastIndex > list.size() - 1) {
+                    batchLastIndex = list.size();
+                    method.invoke(this.mapper, list.subList(index, batchLastIndex));
+                    logger.info("insert :" + index + " to " + batchLastIndex);
+                    logger.info("insertBatch success : " + list.size() + " data inserted ;");
+                    break;//数据插入完成,退出循环
+                } else {
+                    method.invoke(this.mapper, list.subList(index, batchLastIndex));
+                    logger.info("insert :" + index + " to " + batchLastIndex);
+                    index = batchLastIndex;
+                    batchLastIndex = index + (batchCount - 1);
+                    if (index == list.size() - 1) {
+                        method.invoke(this.mapper, list.subList(index, batchLastIndex));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            //throw new ServiceException("插入数据失败！", e);
+        }
+
+    }
 
 
 }

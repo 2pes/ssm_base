@@ -23,7 +23,7 @@
     function loadRemote() {
         $.ajax({
             type: 'post',
-            url: ctx + '/module/sys/role/detail',
+            url: ctx + '/sys/role/detail',
             data: {id: editRow.objId},
             dataType: 'json',
             success: function (data, status) {

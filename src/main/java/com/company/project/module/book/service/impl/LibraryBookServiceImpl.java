@@ -16,10 +16,10 @@ import com.company.project.module.book.dto.AppointExecution;
 import com.company.project.module.book.enums.AppointStateEnum;
 import com.company.project.module.book.model.Appointment;
 import com.company.project.module.book.model.Book;
-import com.company.project.module.book.service.BookService;
+import com.company.project.module.book.service.LibraryBookService;
 
 @Service
-public class BookServiceImpl implements BookService {
+public class LibraryBookServiceImpl implements LibraryBookService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	// 注入Service依赖

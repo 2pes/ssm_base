@@ -69,7 +69,7 @@
     }
     $('#dg_' + 'user').datagrid({
         method: 'post',
-        url: ctx + '/module/sys/user/list',
+        url: ctx + '/sys/user/list',
         queryParams: {
             pageSize: 1,
             pageNum: 10,

@@ -7,6 +7,12 @@
     <title>后台管理首页</title>
     <%@ include file="/WEB-INF/jsp/commons/head.jsp" %>
     <script type="text/javascript" src="${ctx }/static/js/index.js"></script>
+    <style>
+        .panel-fit {
+            min-width: 1366px;
+            overflow: auto;
+        }
+    </style>
 <body class="easyui-layout">
 <%@ include file="/WEB-INF/jsp/commons/loadingDiv.jsp" %>
 <div data-options="region:'north',split:false" style="height: 80px;">
@@ -83,10 +89,11 @@
            iconCls="icon-add" plain="true"></a> <a href="javascript:void(0)"
                                                    class="easyui-linkbutton" iconCls="icon-edit" plain="true"
                                                    onclick="openDialog ('/sys/dialog','800_400')"></a> <a href="javascript:void(0)"
-                                                                                    class="easyui-linkbutton" iconCls="icon-save" plain="true"
-                                                                                    onclick="openDialog ()"></a> <a href="javascript:void(0)"
-                                                                                                                     class="easyui-linkbutton" iconCls="icon-cut"
-                                                                                                                     plain="true"></a> <a
+                                                                                                          class="easyui-linkbutton" iconCls="icon-save" plain="true"
+                                                                                                          onclick="openDialog ()"></a> <a href="javascript:void(0)"
+                                                                                                                                          class="easyui-linkbutton"
+                                                                                                                                          iconCls="icon-cut"
+                                                                                                                                          plain="true"></a> <a
             href="javascript:void(0)" class="easyui-linkbutton"
             iconCls="icon-remove" plain="true"></a>
     </div>
@@ -101,7 +108,7 @@
         iconCls: 'icon-more',
         children: [{
             text: '商品管理',
-            url: '/module/mall/items'
+            url: '/mall/items'
         }, {
             text: 'Option5'
         }, {
@@ -113,24 +120,24 @@
         state: 'open',
         children: [{
             text: '人员管理',
-            url: '/module/sys/user'
+            url: '/sys/user'
         }, {
             text: '角色管理',
-            url: '/module/sys/role'
+            url: '/sys/role'
         }, {
             text: '菜单管理',
-            url: '/module/sys/permission'
+            url: '/sys/permission'
         }, {
             text: '日志管理',
-            url: '/module/sys/log'
+            url: '/sys/log'
         }, {
             text: '字典管理',
-            url: '/module/sys/dict'
+            url: '/sys/dict'
         }, {
             text: '任务管理',
             children: [{
                 text: '任务列表',
-                url: '/module/sys/job'
+                url: '/sys/job'
             }, {
                 text: '任务日志'
             }]
@@ -152,11 +159,11 @@
     function selectHandler(e, t, i) {
         $('#contentDiv').empty();
         $('#contentDiv').load(ctx + e.url, function (response, status, xhr) {
-                if (status == "success") {
-                } else {
-                    message_alert(statusText);
-                }
-            });
+            if (status == "success") {
+            } else {
+                message_alert(statusText);
+            }
+        });
     }
 
 
@@ -286,10 +293,9 @@
     };
 
 
-
     function addItem() {
         $.ajax({
-            url: ctx + "/module/mall/items/add",//交互地址
+            url: ctx + "/mall/items/add",//交互地址
             type: "post",//方法
             //dataType:"json",
             //dataType : "application/json",//头部
@@ -310,7 +316,7 @@
 
     function getMenusByUser() {
         $.ajax({
-            url: ctx + "/module/sys/permission/getMenusByUser",
+            url: ctx + "/sys/permission/getMenusByUser",
             type: "post",
             dataType: "json",
             //dataType : "application/json",//头部

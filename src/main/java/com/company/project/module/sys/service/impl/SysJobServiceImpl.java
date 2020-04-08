@@ -1,6 +1,6 @@
 package com.company.project.module.sys.service.impl;
 
-import com.company.project.module.sys.service.JobService;
+import com.company.project.module.sys.service.SysJobService;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * @created 2019-10-26-22:52.
  */
 @Service
-public class JobServiceImpl implements JobService {
+public class SysJobServiceImpl implements SysJobService {
 
     @Autowired
     private Scheduler quartzScheduler;

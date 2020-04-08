@@ -37,7 +37,7 @@
 
     $('#dg_' + 'item').datagrid({
         method: 'post',
-        url: ctx + '/module/mall/items/list',
+        url: ctx + '/mall/items/list',
         queryParams: {
             pageSize: 1,
             pageNum: 10,
@@ -69,7 +69,7 @@
 
     function updateItem(id) {
         $.ajax({
-            url: ctx + "/module/sys/permission/getMenusByUser",
+            url: ctx + "/sys/permission/getMenusByUser",
             type: "post",
             dataType: "json",
             //dataType : "application/json",//头部

@@ -6,7 +6,7 @@ import com.company.project.core.ResultGenerator;
 import com.company.project.core.controller.BaseController;
 import com.company.project.core.model.QueryRequest;
 import com.company.project.module.sys.model.JobEntity;
-import com.company.project.module.sys.service.JobService;
+import com.company.project.module.sys.service.SysJobService;
 import io.swagger.annotations.ApiOperation;
 import org.quartz.*;
 import org.quartz.impl.matchers.GroupMatcher;
@@ -26,8 +26,8 @@ import java.util.*;
  * @created 2019-10-26-22:44.
  */
 @RestController
-@RequestMapping("/module/sys/job")
-public class JobController extends BaseController {
+@RequestMapping("/sys/job")
+public class SysJobController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
@@ -35,7 +35,7 @@ public class JobController extends BaseController {
     private Scheduler quartzScheduler;
 
     @Autowired
-    private JobService jobService;
+    private SysJobService sysJobService;
 
     @GetMapping()
     @ApiOperation(value = "请求地址", notes = "任务列表地址")
@@ -90,7 +90,7 @@ public class JobController extends BaseController {
         String clazz = request.getParameter("clazz");
         Class cls = Class.forName(clazz);
         String cron = request.getParameter("cron");
-        jobService.addJob(jobName, jobGroupName, triggerName, triggerGroupName, cls, cron);
+        sysJobService.addJob(jobName, jobGroupName, triggerName, triggerGroupName, cls, cron);
         request.setAttribute("message", "添加任务成功!");
         request.setAttribute("opName", "添加任务!");
         return "module/sys/job/message";
@@ -154,7 +154,7 @@ public class JobController extends BaseController {
         String oldtriggerName = request.getParameter("oldtriggerName");
         String oldtriggerGroup = request.getParameter("oldtriggerGroup");
 
-        boolean result = jobService.modifyJobTime(oldjobName, oldjobGroup, oldtriggerName, oldtriggerGroup,
+        boolean result = sysJobService.modifyJobTime(oldjobName, oldjobGroup, oldtriggerName, oldtriggerGroup,
                 jobName, jobGroupName, triggerName, triggerGroupName, cron);
         if (result) {
             request.setAttribute("message", "修改任务成功!");
@@ -173,7 +173,7 @@ public class JobController extends BaseController {
         if (StringUtils.isEmpty(jobName) || StringUtils.isEmpty(jobGroupName)) {
             json.put("status", "wrong");
         } else {
-            jobService.pauseJob(jobName, jobGroupName);
+            sysJobService.pauseJob(jobName, jobGroupName);
             json.put("status", "success");
         }
 
@@ -188,7 +188,7 @@ public class JobController extends BaseController {
         if (StringUtils.isEmpty(jobName) || StringUtils.isEmpty(jobGroupName)) {
             json.put("status", "wrong");
         } else {
-            jobService.resumeJob(jobName, jobGroupName);
+            sysJobService.resumeJob(jobName, jobGroupName);
             json.put("status", "success");
         }
 
@@ -205,7 +205,7 @@ public class JobController extends BaseController {
                 StringUtils.isEmpty(triggerName) || StringUtils.isEmpty(triggerGroupName)) {
             json.put("status", "wrong");
         } else {
-            jobService.removeJob(jobName, jobGroupName, triggerName, triggerGroupName);
+            sysJobService.removeJob(jobName, jobGroupName, triggerName, triggerGroupName);
             json.put("status", "success");
         }
 

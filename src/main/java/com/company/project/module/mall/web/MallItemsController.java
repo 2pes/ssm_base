@@ -22,7 +22,7 @@ import java.util.Map;
  * Created by company.chen on 2019/10/21.
  */
 @RestController
-@RequestMapping("/module/mall/items")
+@RequestMapping("/mall/items")
 @Api(description = "商品管理")
 public class MallItemsController extends BaseController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());

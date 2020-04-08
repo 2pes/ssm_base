@@ -15,7 +15,7 @@ public class BookMapperTest extends BaseTest {
 
 	@Test
 	public void testQueryById() throws Exception {
-		long bookId = 1000;
+		long bookId = 1001;
 		Book book = bookDao.queryById(bookId);
 		System.out.println(book);
 	}

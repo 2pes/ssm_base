@@ -74,13 +74,13 @@ function timestampToTime(timestamp) {
 //退出系统方法
 function logout() {
     _confirm('您确定要退出本系统吗?', null, function () {
-        location.href = ctx +'/logout';
+        location.href = ctx + '/logout';
     })
 }
 
 //帮助
 function showhelp() {
-    window.open(ctx+'/help.html', '帮助文档');
+    window.open(ctx + '/help.html', '帮助文档');
 }
 
 /**
@@ -125,9 +125,9 @@ function toggle() {
  * @param res
  * @param fn
  */
-function openDialog(url, size, id, res, fn,status) {
+function openDialog(url, size, id, res, fn, status) {
     var split = ['800', '400'];
-    editRow = {objId: res,status:status};//obj为编辑项id,status编辑状态，为add
+    editRow = {objId: res, status: status};//obj为编辑项id,status编辑状态，为add
     var row = '';
     try {
         fn = eval(fn);

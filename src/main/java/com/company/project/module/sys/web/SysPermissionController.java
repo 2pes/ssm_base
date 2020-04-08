@@ -28,7 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by company.chen on 2019/10/20.
  */
 @RestController
-@RequestMapping("/module/sys/permission")
+@RequestMapping("/sys/permission")
 @Api(description = "权限管理")
 public class SysPermissionController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -41,6 +41,7 @@ public class SysPermissionController extends BaseController {
     public ModelAndView listPage() {
         return new ModelAndView("/module/sys/permission/list");
     }
+
     @GetMapping("/edit")
     @ApiOperation(value = "请求地址", notes = "菜单修改页面地址")
     public ModelAndView editPage() {
@@ -105,7 +106,7 @@ public class SysPermissionController extends BaseController {
 
     @PostMapping("/getMenusByUser")
     @ApiOperation(value = "查询树形菜单", notes = "根据角色查询树形菜单")
-    public Result getMenusByUser()  {
+    public Result getMenusByUser() {
         ActiveUser currentUser = super.getCurrentUser();
         List<EasyUITreeNode<EasyUITreeNode>> result = sysPermissionService.getMenusByUser(currentUser);
         return ResultGenerator.genSuccessResult(result);
@@ -123,6 +124,7 @@ public class SysPermissionController extends BaseController {
             return ResultGenerator.genFailResult("获取权限列表失败！");
         }
     }
+
     @PostMapping("/getTreeByRole")
     @ApiOperation(value = "列表", notes = "权限树形数据，用于角色")
     public Result getTreeList(QueryRequest request) {

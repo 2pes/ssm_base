@@ -2,6 +2,7 @@ package com.company.project.module.book.web;
 
 import java.util.List;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +17,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.company.project.core.Result;
 import com.company.project.module.book.dto.AppointExecution;
 import com.company.project.module.book.model.Book;
-import com.company.project.module.book.service.BookService;
+import com.company.project.module.book.service.LibraryBookService;
 
 @Controller
-@RequestMapping("/book") // url:/模块/资源/{id}/细分 /seckill/list
-public class BookController {
+@RequestMapping("/library/book") // url:/模块/资源/{id}/细分 /seckill/list
+public class LibraryBookController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
-	private BookService bookService;
+	private LibraryBookService bookService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequiresPermissions("items:query")
 	private String list(Model model) {
 		List<Book> list = bookService.getList();
 		model.addAttribute("list", list);

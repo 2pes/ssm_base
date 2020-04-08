@@ -59,16 +59,16 @@
         });
         $('.project-add-btn').bind('click', function(){
             editRow='';
-            openDialog('/module/sys/permission/edit','600_600',null,-1,null,'add');
+            openDialog('/sys/permission/edit','600_600',null,-1,null,'add');
         });
         var permissioncolumns = function (value, row, index) {
-            var toolbtn = '<a plain="true" href="javascript:void(0);" style="color: #48a2ff" onclick="openDialog(\'/module/sys/permission/edit\',\'600_600\',\'tt_permission\',\'' + row.id + '\',getEdit,\'edit\')">修改</a>' +
+            var toolbtn = '<a plain="true" href="javascript:void(0);" style="color: #48a2ff" onclick="openDialog(\'/sys/permission/edit\',\'600_600\',\'tt_permission\',\'' + row.id + '\',getEdit,\'edit\')">修改</a>' +
                 ' | <a plain="true"  href="javascript:void(0);" style="color: #48a2ff" onclick="_confirm(\'确认删除【' + row.name + '\】\',null,detletRow)">删除</a>'
             return toolbtn;
         };
 
         $('#tt_' + 'permission').treegrid({
-            url: ctx + '/module/sys/permission/treeGrid',
+            url: ctx + '/sys/permission/treeGrid',
             method: 'post',
             idField: 'id',
             treeField: 'name',

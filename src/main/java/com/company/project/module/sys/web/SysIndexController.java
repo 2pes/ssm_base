@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.company.project.module.sys.model.ActiveUser;
 
 @Controller
-public class IndexController extends BaseController {
+public class SysIndexController extends BaseController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     private String index(Model model) {

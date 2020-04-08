@@ -31,7 +31,7 @@
     function loadRemote() {
         $.ajax({
             type: 'post',
-            url: ctx + '/module/sys/role/detail',
+            url: ctx + '/sys/role/detail',
             data: {id: editRow.objId},
             dataType: 'json',
             success: function (data, status) {
@@ -71,7 +71,7 @@
         $('#tt_' + 'role_permission').tree({
             method: 'post',
             queryParams: {id: editRow.objId},
-            url: ctx + '/module/sys/permission/getMenusByUser',
+            url: ctx + '/sys/permission/getMenusByUser',
             loadFilter: function (data) {
 
                 if (data.data) {
