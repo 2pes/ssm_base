@@ -47,7 +47,7 @@
         <ojdbc6.version>11.2.0.3</ojdbc6.version>
         <lombok.version>1.16.20</lombok.version>
         <jackson.version>2.9.10.1</jackson.version>
-        <shiro-core.version>1.4.0</shiro-core.version>
+        <shiro-core.version>1.6.0</shiro-core.version>
 
         <guava.version>23.0</guava.version>
         <hutool.version>4.6.1</hutool.version>
